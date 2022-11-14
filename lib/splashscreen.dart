@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:innov_anglais/myhomepage.dart';
+import 'package:innov_anglais/ecran/myhomepage.dart';
 
 class SplashScreenState extends State<MyHomePage> {
   @override
