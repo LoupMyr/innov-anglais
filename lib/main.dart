@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:innov_anglais/jeu.dart';
+import 'package:innov_anglais/ecran/myhomepage.dart';
+import 'package:innov_anglais/menuTests.dart';
+import 'package:innov_anglais/ecran/connexion.dart';
+import 'package:innov_anglais/ecran/inscription.dart';
+import 'package:innov_anglais/ecran/myhomepage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,11 +15,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'jeu',
+      title: 'Innov Anglais',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.yellow,
       ),
-      home: const Jeu(title: 'jeu'),
+      debugShowCheckedModeBanner: false,
+      home: const HomeScreen(title: "Innov'Anglais"),
+      routes: <String, WidgetBuilder>{
+        '/routeMenuTests': (BuildContext context) =>
+            const MenuTestsPage(title: "Innov'Anglais - Tests"),
+      },
     );
   }
 }
