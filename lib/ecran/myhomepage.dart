@@ -1,25 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:innov_anglais/splashscreen.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key, required this.title});
 
   final String title;
 
   @override
-  MyHomePageState createState() => MyHomePageState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class MyHomePageState extends State<MyHomePage> {
+class HomeScreenState extends State<HomeScreen> {
   final ScrollController _firstController = ScrollController();
-  int _counter = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
-        centerTitle: true,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+                width: MediaQuery.of(context).size.width * 0.20,
+                height: MediaQuery.of(context).size.height * 0.20,
+                child: Image.asset('lib/assets/innovAnglaisLogo.png')),
+            const Text('Innov\'Anglais',
+                style: TextStyle(
+                  fontSize: 18,
+                )),
+          ],
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -126,7 +136,7 @@ class MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
-          onPressed: () => null,
+          onPressed: () => Navigator.pushNamed(context, '/routeMenuTests'),
           label: const Text("Lancer votre première partie"),
           icon: const Icon(Icons.play_arrow)),
     );

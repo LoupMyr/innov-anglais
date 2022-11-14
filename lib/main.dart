@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:innov_anglais/ecran/myhomepage.dart';
+import 'package:innov_anglais/menuTests.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.yellow,
       ),
       debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: "Innov'Anglais"),
+      home: const HomeScreen(title: "Innov'Anglais"),
+      routes: <String, WidgetBuilder>{
+        '/routeMenuTests': (BuildContext context) =>
+            const MenuTestsPage(title: "Innov'Anglais - Tests"),
+      },
     );
   }
 }
