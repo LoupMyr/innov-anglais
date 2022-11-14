@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:innov_anglais/ecran/myhomepage.dart';
-<<<<<<< HEAD
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -11,8 +10,6 @@ class MyHomePage extends StatefulWidget {
   @override
   SplashScreenState createState() => SplashScreenState();
 }
-=======
->>>>>>> 12488215e0ae52d54b28ca7037a93087ad363e03
 
 class SplashScreenState extends State<MyHomePage> {
   @override
