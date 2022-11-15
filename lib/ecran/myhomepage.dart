@@ -12,8 +12,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  late AnimationController _animationController;
-  bool selected = false;
+  List<Container> container = [
+    Container(
+      alignment: Alignment.center,
+      height: 120,
+      width: 120,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10), color: Colors.cyan.shade200),
+    ),
+    Container(
+      alignment: Alignment.center,
+      height: 120,
+      width: 120,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10), color: Colors.cyan.shade200),
+    ),
+  ];
 
   @override
   void initState() {
@@ -43,155 +57,131 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           ),
           SliverToBoxAdapter(
             child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Container(
+              scrollDirection: Axis.horizontal,
+              child: Container(
                   height: MediaQuery.of(context).size.height,
                   color: Colors.white,
                   child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Row(
-                              children: const [
-                                Padding(padding: EdgeInsets.all(10)),
-                                Text(
-                                  "Explorez",
-                                  style: TextStyle(
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Padding(padding: EdgeInsets.all(10)),
-                                IconButton(
-                                    onPressed: null,
-                                    icon: Icon(Icons.arrow_drop_down))
-                              ],
-                            ),
-                            Padding(padding: EdgeInsets.all(5)),
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  selected = !selected;
-                                });
-                              },
-                              child: Center(
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.5,
-                                  color: Colors.white,
-                                  child: AnimatedAlign(
-                                    alignment: selected
-                                        ? Alignment.centerLeft
-                                        : Alignment.centerRight,
-                                    duration: const Duration(seconds: 10),
-                                    curve: Curves.fastOutSlowIn,
-                                    child: const FlutterLogo(size: 50.0),
-                                  ),
-                                ),
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(padding: EdgeInsets.all(5)),
+                          Row(
+                            children: const [
+                              Padding(padding: EdgeInsets.all(10)),
+                              Text(
+                                "Explorez",
+                                style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold),
                               ),
-                            ),
-                            Padding(padding: EdgeInsets.all(20)),
-                            GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    selected = !selected;
-                                  });
-                                },
-                                child: AnimatedAlign(
-                                  duration: Duration(seconds: 10),
-                                  curve: Curves.fastOutSlowIn,
-                                  alignment: selected
-                                      ? Alignment.centerLeft
-                                      : Alignment.center,
-                                  child: Row(
-                                    children: [
-                                      const Padding(padding: EdgeInsets.all(8)),
-                                      Container(
-                                        alignment: Alignment.center,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.185,
-                                        width: 120,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: Colors.cyan.shade200),
-                                      ),
-                                      const Padding(padding: EdgeInsets.all(5)),
-                                      Container(
-                                        alignment: Alignment.center,
-                                        height: 120,
-                                        width: 120,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: Colors.cyan.shade200),
-                                      ),
-                                      const Padding(padding: EdgeInsets.all(5)),
-                                      Container(
-                                        alignment: Alignment.center,
-                                        height: 120,
-                                        width: 120,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: Colors.cyan.shade200),
-                                      ),
-                                    ],
+                              Padding(padding: EdgeInsets.all(10)),
+                              IconButton(
+                                  onPressed: null,
+                                  icon: Icon(Icons.arrow_drop_down))
+                            ],
+                          ),
+                          PageView.builder(
+                              itemCount: container.length,
+                              pageSnapping: true,
+                              itemBuilder: (context, pagePosition) {
+                                return Container(
+                                  margin: EdgeInsets.all(10),
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height: 120,
+                                    width: 120,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.cyan.shade200),
                                   ),
-                                )),
-                            const Padding(padding: EdgeInsets.all(8)),
-                            Row(
-                              children: const [
-                                Padding(padding: EdgeInsets.all(10)),
-                                Text(
-                                  "Faisez vos premiers pas",
-                                  style: TextStyle(
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Padding(padding: EdgeInsets.all(10)),
-                                IconButton(
-                                    onPressed: null,
-                                    icon: Icon(Icons.arrow_drop_down))
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                const Padding(padding: EdgeInsets.all(8)),
-                                Container(
-                                  alignment: Alignment.center,
-                                  height: 120,
-                                  width: 120,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.cyan.shade200),
-                                ),
-                                const Padding(padding: EdgeInsets.all(5)),
-                                Container(
-                                  alignment: Alignment.center,
-                                  height: 120,
-                                  width: 120,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.cyan.shade200),
-                                ),
-                                const Padding(padding: EdgeInsets.all(5)),
-                                Container(
-                                  alignment: Alignment.center,
-                                  height: 120,
-                                  width: 120,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.cyan.shade200),
-                                ),
-                              ],
-                            ),
-                          ])),
-                )),
-          ),
+                                );
+                              }),
+                          Row(
+                            children: [
+                              const Padding(padding: EdgeInsets.all(8)),
+                              Container(
+                                alignment: Alignment.center,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.185,
+                                width: 120,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.cyan.shade200),
+                              ),
+                              const Padding(padding: EdgeInsets.all(5)),
+                              Container(
+                                alignment: Alignment.center,
+                                height: 120,
+                                width: 120,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.cyan.shade200),
+                              ),
+                              const Padding(padding: EdgeInsets.all(5)),
+                              Container(
+                                alignment: Alignment.center,
+                                height: 120,
+                                width: 120,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.cyan.shade200),
+                              ),
+                            ],
+                          ),
+                          const Padding(padding: EdgeInsets.all(8)),
+                          Row(
+                            children: const [
+                              Padding(padding: EdgeInsets.all(10)),
+                              Text(
+                                "Faîtes vos premiers pas",
+                                style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Padding(padding: EdgeInsets.all(10)),
+                              IconButton(
+                                  onPressed: null,
+                                  icon: Icon(Icons.arrow_drop_down))
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              const Padding(padding: EdgeInsets.all(8)),
+                              Container(
+                                alignment: Alignment.center,
+                                height: 120,
+                                width: 120,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.cyan.shade200),
+                              ),
+                              const Padding(padding: EdgeInsets.all(5)),
+                              Container(
+                                alignment: Alignment.center,
+                                height: 120,
+                                width: 120,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.cyan.shade200),
+                              ),
+                              const Padding(padding: EdgeInsets.all(5)),
+                              Container(
+                                alignment: Alignment.center,
+                                height: 120,
+                                width: 120,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.cyan.shade200),
+                              ),
+                            ],
+                          ),
+                        ]),
+                  )),
+            ),
+          )
         ],
       ),
       bottomNavigationBar: BottomAppBar(
