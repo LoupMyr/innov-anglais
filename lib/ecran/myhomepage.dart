@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:innov_anglais/splashscreen.dart';
 import 'package:innov_anglais/strings.dart';
@@ -12,177 +13,274 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  List<Container> container = [
-    Container(
-      alignment: Alignment.center,
-      height: 120,
-      width: 120,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10), color: Colors.cyan.shade200),
-    ),
-    Container(
-      alignment: Alignment.center,
-      height: 120,
-      width: 120,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10), color: Colors.cyan.shade200),
-    ),
-  ];
+  bool selected = false;
+  late PageController _pageController = PageController();
 
   @override
   void initState() {
     super.initState();
+    _pageController = PageController(viewportFraction: 0.8);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar.large(
-            centerTitle: true,
-            flexibleSpace: const FlexibleSpaceBar(
-              background: Image(
-                image: AssetImage(
-                  ("lib/assets/innovAnglaisLogo.png"),
-                ),
+      appBar: AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(40),
+            bottomRight: Radius.circular(40),
+          ),
+        ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 100,
+              width: 100,
+              child: Image(
+                image: AssetImage("lib/assets/innovAnglaisLogo.png"),
               ),
             ),
-            backgroundColor: Colors.yellow,
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(30),
-              bottomRight: Radius.circular(30),
-            )),
-          ),
-          SliverToBoxAdapter(
-            child: SingleChildScrollView(
+            Text("Innov'Anglais")
+          ],
+        ),
+      ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(children: [
+          SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  color: Colors.white,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Padding(padding: EdgeInsets.all(5)),
-                          Row(
-                            children: const [
-                              Padding(padding: EdgeInsets.all(10)),
-                              Text(
-                                "Explorez",
-                                style: TextStyle(
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Padding(padding: EdgeInsets.all(10)),
-                              IconButton(
-                                  onPressed: null,
-                                  icon: Icon(Icons.arrow_drop_down))
-                            ],
+                height: MediaQuery.of(context).size.height,
+                color: Colors.white,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(padding: EdgeInsets.all(5)),
+                      Row(
+                        children: const [
+                          Padding(padding: EdgeInsets.all(10)),
+                          Text(
+                            "Explorez",
+                            style: TextStyle(
+                                fontSize: 20.0, fontWeight: FontWeight.bold),
                           ),
-                          /*PageView.builder(
-                              itemCount: container.length,
-                              pageSnapping: true,
-                              itemBuilder: (context, pagePosition) {
-                                return Container(
-                                  margin: EdgeInsets.all(10),
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    height: 120,
-                                    width: 120,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Colors.cyan.shade200),
-                                  ),
-                                );
-                              }),*/
-                          Row(
-                            children: [
-                              const Padding(padding: EdgeInsets.all(8)),
-                              Container(
-                                alignment: Alignment.center,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.185,
-                                width: 120,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.cyan.shade200),
-                              ),
-                              const Padding(padding: EdgeInsets.all(5)),
-                              Container(
-                                alignment: Alignment.center,
-                                height: 120,
-                                width: 120,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.cyan.shade200),
-                              ),
-                              const Padding(padding: EdgeInsets.all(5)),
-                              Container(
-                                alignment: Alignment.center,
-                                height: 120,
-                                width: 120,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.cyan.shade200),
-                              ),
-                            ],
-                          ),
+                          Padding(padding: EdgeInsets.all(10)),
+                          IconButton(
+                              onPressed: null,
+                              icon: Icon(Icons.arrow_drop_down))
+                        ],
+                      ),
+                      _caroussel(),
+                      Row(
+                        children: [
                           const Padding(padding: EdgeInsets.all(8)),
-                          Row(
-                            children: const [
-                              Padding(padding: EdgeInsets.all(10)),
-                              Text(
-                                "Faîtes vos premiers pas",
-                                style: TextStyle(
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Padding(padding: EdgeInsets.all(10)),
-                              IconButton(
-                                  onPressed: null,
-                                  icon: Icon(Icons.arrow_drop_down))
-                            ],
+                          Container(
+                            alignment: Alignment.center,
+                            height: 120,
+                            width: 120,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Colors.blue,
+                                      Colors.cyan,
+                                    ],
+                                    begin: Alignment.topRight,
+                                    end: Alignment.bottomLeft)),
                           ),
-                          Row(
-                            children: [
-                              const Padding(padding: EdgeInsets.all(8)),
-                              Container(
-                                alignment: Alignment.center,
-                                height: 120,
-                                width: 120,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.cyan.shade200),
-                              ),
-                              const Padding(padding: EdgeInsets.all(5)),
-                              Container(
-                                alignment: Alignment.center,
-                                height: 120,
-                                width: 120,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.cyan.shade200),
-                              ),
-                              const Padding(padding: EdgeInsets.all(5)),
-                              Container(
-                                alignment: Alignment.center,
-                                height: 120,
-                                width: 120,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.cyan.shade200),
-                              ),
-                            ],
+                          const Padding(padding: EdgeInsets.all(5)),
+                          Container(
+                            alignment: Alignment.center,
+                            height: 120,
+                            width: 120,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.cyan.shade200),
                           ),
-                        ]),
-                  )),
-            ),
-          )
-        ],
+                          const Padding(padding: EdgeInsets.all(5)),
+                          Container(
+                            alignment: Alignment.center,
+                            height: 120,
+                            width: 120,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.cyan.shade200),
+                          ),
+                        ],
+                      ),
+                      const Padding(padding: EdgeInsets.all(8)),
+                      Row(
+                        children: const [
+                          Padding(padding: EdgeInsets.all(10)),
+                          Text(
+                            "Faîtes vos premiers pas",
+                            style: TextStyle(
+                                fontSize: 20.0, fontWeight: FontWeight.bold),
+                          ),
+                          Padding(padding: EdgeInsets.all(10)),
+                          IconButton(
+                              onPressed: null,
+                              icon: Icon(Icons.arrow_drop_down))
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Padding(padding: EdgeInsets.all(8)),
+                          Container(
+                            alignment: Alignment.center,
+                            height: 120,
+                            width: 120,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Colors.orange,
+                                      Colors.yellow.shade300,
+                                    ],
+                                    begin: Alignment.topRight,
+                                    end: Alignment.bottomLeft)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(padding: EdgeInsets.all(10)),
+                                Row(
+                                  children: [
+                                    Padding(padding: EdgeInsets.all(5)),
+                                    Text(
+                                      "Débutant",
+                                      style: TextStyle(fontSize: 15.0),
+                                    )
+                                  ],
+                                ),
+                                Padding(padding: EdgeInsets.all(10)),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(5),
+                                      height: 30,
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.red.shade300,
+                                      ),
+                                      child: const Text(
+                                        "1",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                          const Padding(padding: EdgeInsets.all(5)),
+                          Container(
+                            alignment: Alignment.center,
+                            height: 120,
+                            width: 120,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Colors.green,
+                                      Colors.green.shade200,
+                                    ],
+                                    begin: Alignment.topRight,
+                                    end: Alignment.bottomLeft)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Padding(padding: EdgeInsets.all(10)),
+                                Row(
+                                  children: [
+                                    Padding(padding: EdgeInsets.all(5)),
+                                    Text(
+                                      "Avancé",
+                                      style: TextStyle(fontSize: 15.0),
+                                    )
+                                  ],
+                                ),
+                                Padding(padding: EdgeInsets.all(10)),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(5),
+                                      height: 30,
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.red.shade300,
+                                      ),
+                                      child: const Text(
+                                        "2",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                          const Padding(padding: EdgeInsets.all(5)),
+                          Container(
+                            alignment: Alignment.center,
+                            height: 120,
+                            width: 120,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Colors.grey.shade700,
+                                      Colors.grey.shade300,
+                                    ],
+                                    begin: Alignment.topRight,
+                                    end: Alignment.bottomLeft)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Padding(padding: EdgeInsets.all(10)),
+                                Row(
+                                  children: [
+                                    Padding(padding: EdgeInsets.all(5)),
+                                    Text(
+                                      "Expert",
+                                      style: TextStyle(fontSize: 15.0),
+                                    )
+                                  ],
+                                ),
+                                Padding(padding: EdgeInsets.all(10)),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(5),
+                                      height: 30,
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.red.shade300,
+                                      ),
+                                      child: const Text(
+                                        "3",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ]),
+              )),
+        ]),
       ),
       bottomNavigationBar: BottomAppBar(
         shape: const AutomaticNotchedShape(
@@ -260,7 +358,34 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  Widget _gameContainer() {
-    return Container();
+  Widget _caroussel() {
+    List<Container> container = [
+      Container(
+        height: 120,
+        width: 120,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.cyan,
+        ),
+      ),
+      Container(
+        height: 120,
+        width: 120,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.cyan,
+        ),
+      ),
+    ];
+    return PageView.builder(
+        itemCount: container.length,
+        pageSnapping: true,
+        controller: _pageController,
+        itemBuilder: (context, pagePosition) {
+          return Container(
+            margin: EdgeInsets.all(10),
+            child: container[pagePosition],
+          );
+        });
   }
 }

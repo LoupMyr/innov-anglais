@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:innov_anglais/ecran/connexion.dart';
 import 'package:innov_anglais/ecran/myhomepage.dart';
 import 'package:innov_anglais/main.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -18,11 +19,11 @@ class SplashScreenState extends State<MyHomePage> {
   void initState() {
     super.initState();
     Timer(
-        const Duration(seconds: 6),
+        const Duration(seconds: 3),
         () => Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => HomeScreen(title: 'innovanglais'))));
+                builder: (context) => Connexion(title: 'Connexion'))));
   }
 
   @override
