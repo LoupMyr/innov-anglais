@@ -19,14 +19,14 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.yellow,
       ),
       debugShowCheckedModeBanner: false,
-      home: const Connexion(title: "Innov'Anglais"),
+      home: const Connexion(title: "Connexion"),
       routes: <String, WidgetBuilder>{
         '/routeMenuTests': (BuildContext context) =>
             const MenuTestsPage(title: "Innov'Anglais - Tests"),
         '/inscription': (BuildContext context) =>
-            const Inscription(title: "Innov'Anglais"),
+            const Inscription(title: "Inscription"),
         '/connexion': (BuildContext context) =>
-            const Connexion(title: "Innov'Anglais"),
+            const Connexion(title: "Connexion"),
         '/home': (BuildContext context) =>
             const HomeScreen(title: "Innov'Anglais"),
       },

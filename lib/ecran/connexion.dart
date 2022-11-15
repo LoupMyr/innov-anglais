@@ -24,7 +24,9 @@ class ConnexionState extends State<Connexion> {
   Future<http.Response> recupConnect(String login, String mdp) {
     return http.post(
       Uri.parse(
-          'https://s3-4430.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/authentication_token'),
+          'https://s3-4430.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/authentication_token'
+          //'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/authentication_token'
+          ),
       headers: <String, String>{
         'Accept': 'application/json; charset=UTF-8',
         'Content-Type': 'application/json',
@@ -58,6 +60,19 @@ class ConnexionState extends State<Connexion> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: [
+          Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pushReplacementNamed(context, '/inscription');
+                },
+                child: Icon(
+                  Icons.account_circle_outlined,
+                  size: 26.0,
+                ),
+              )),
+        ],
       ),
       body: Center(
         child: Form(
