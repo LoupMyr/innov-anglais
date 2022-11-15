@@ -1,93 +1,118 @@
+import 'dart:developer';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:innov_anglais/splashscreen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class MenuTestsPage extends StatefulWidget {
-  const MenuTestsPage({super.key, required this.title});
+class ClassementPage extends StatefulWidget {
+  const ClassementPage({super.key, required this.title});
 
   final String title;
 
   @override
-  MenuTestsPageState createState() => MenuTestsPageState();
+  ClassementPageState createState() => ClassementPageState();
 }
 
-class MenuTestsPageState extends State<MenuTestsPage> {
-  Map<String, dynamic> _tests = new Map();
+class ClassementPageState extends State<ClassementPage> {
+  Map<String, dynamic> _users = new Map();
   bool _recupDataBool = false;
   int _status_code = -1;
 
-  Future<String> recupTests() async {
+  Future<String> recupResultats() async {
     String url =
-        "http://s3-4428.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/tests";
+        "http://s3-4428.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/users";
     var reponse = await http.get(Uri.parse(url));
     String result = 'pas de result';
     _status_code = reponse.statusCode;
     if (reponse.statusCode == 200) {
-      _tests = convert.jsonDecode(reponse.body);
+      _users = convert.jsonDecode(reponse.body);
       _recupDataBool = true;
       result = 'result';
     }
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     return result;
   }
 
   Widget createRows() {
-    List<Widget> tab = [];
-    int nbTests = 0;
-    if (_tests['hydra:totalItems'] != null) {
-      nbTests = _tests['hydra:totalItems'];
-    }
+    List tabUser = [];
+    List<Widget> tabChildren = [];
 
-    for (int i = 0; i < nbTests; i++) {
-      tab.add(Row(
-        children: [
-          Card(
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.outline,
-              ),
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
+    for (int i = 0; i < 3; i++) {
+      tabUser.add(_users['hydra:member'][i]);
+    }
+    for (int i = 0; i < tabUser.length; i++) {
+      for (int j = i + 1; j < tabUser.length; j++) {
+        if (tabUser[i]['scoreTotal'] < tabUser[j]['scoreTotal']) {
+          var temp = tabUser[i];
+          tabUser[i] = tabUser[j];
+          tabUser[j] = temp;
+        }
+      }
+    }
+    for (int i = 0; i < tabUser.length; i++) {
+      AssetImage img = AssetImage('lib/assets/innovAnglaisLogo.png');
+      if (i == 0) {
+        img = AssetImage('lib/assets/goldMedal.png');
+      }
+      if (i == 1) {
+        img = AssetImage('lib/assets/silverMedal.png');
+      }
+      if (i == 2) {
+        img = AssetImage('lib/assets/bronzeMedal.png');
+      }
+      tabChildren.add(
+        Card(
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: Theme.of(context).colorScheme.onSecondary,
             ),
-            child: ElevatedButton(
-              onPressed: () => lancerTest(i),
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.87,
-                height: MediaQuery.of(context).size.width * 0.18,
-                child: Center(
-                  child: Text(_tests['hydra:member'][i]['niveau']),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+          ),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.87,
+            height: MediaQuery.of(context).size.width * 0.20,
+            child: Row(
+              children: <Widget>[
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.2,
+                  child: Image(image: img),
                 ),
-              ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.4,
+                  child: Text(tabUser[i]['username']),
+                ),
+                Text(tabUser[i]['scoreTotal'].toString()),
+              ],
             ),
           ),
-        ],
-      ));
+        ),
+      );
     }
+
     return Column(
-      children: tab,
+      children: tabChildren,
     );
   }
-
-  void lancerTest(id) {}
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: recupTests(),
+        future: recupResultats(),
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
           List<Widget> children;
           if (snapshot.hasData) {
             children = <Widget>[
-              Row(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const <Widget>[
-                  Text('Voici la liste des tests disponibles:',
-                      style: TextStyle(fontSize: 20)),
+                  Text(
+                    'Voici le classement des utilisateurs avec les meilleurs résultats:',
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ],
               ),
               const Padding(padding: EdgeInsets.symmetric(vertical: 10)),

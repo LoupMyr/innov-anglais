@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:innov_anglais/ecran/classement.dart';
 import 'package:innov_anglais/ecran/myhomepage.dart';
 import 'package:innov_anglais/ecran/menuTests.dart';
 import 'package:innov_anglais/ecran/connexion.dart';
@@ -24,13 +25,15 @@ class MyApp extends StatelessWidget {
       home: const MyHomePage(title: "Innov'Anglais"),
       routes: <String, WidgetBuilder>{
         '/routeMenuTests': (BuildContext context) =>
-            const MenuTestsPage(title: "Innov'Anglais - Tests"),
+            const MenuTestsPage(title: "Innov'Anglais"),
         '/inscription': (BuildContext context) =>
             const Inscription(title: "Innov'Anglais"),
         '/connexion': (BuildContext context) =>
             const Connexion(title: "Innov'Anglais"),
         '/home': (BuildContext context) =>
             const HomeScreen(title: "Innov'Anglais"),
+        '/routeClassement': (BuildContext context) =>
+            const ClassementPage(title: "Innov'Anglais"),
       },
     );
   }

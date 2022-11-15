@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:innov_anglais/ecran/connexion.dart';
 import 'package:innov_anglais/ecran/myhomepage.dart';
 import 'package:innov_anglais/main.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -22,7 +23,7 @@ class SplashScreenState extends State<MyHomePage> {
         () => Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => HomeScreen(title: 'innovanglais'))));
+                builder: (context) => const HomeScreen(title: 'Connexion'))));
   }
 
   @override
