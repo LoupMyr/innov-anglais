@@ -1,4 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
+import 'package:innov_anglais/ecran/myhomepage.dart';
+import 'package:innov_anglais/local.dart';
 
 class Connexion extends StatefulWidget {
   const Connexion({super.key, required this.title});
@@ -13,6 +19,39 @@ class ConnexionState extends State<Connexion> {
   final _formKey = GlobalKey<FormState>();
   String _login = "";
   String _password = "";
+  bool _connexion = false;
+
+  Future<http.Response> recupConnect(String login, String mdp) {
+    return http.post(
+      Uri.parse(
+          'https://s3-4430.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/authentication_token'),
+      headers: <String, String>{
+        'Accept': 'application/json; charset=UTF-8',
+        'Content-Type': 'application/json',
+      },
+      body: convert
+          .jsonEncode(<String, String>{'username': login, 'password': mdp}),
+    );
+  }
+
+  void afficheToken() async {
+    var connexion = await recupConnect(_login, _password);
+    log(_login);
+    log(_password);
+    if (connexion.statusCode == 200) {
+      localLogin = _login;
+      localPassword = _password;
+      var data = convert.jsonDecode(connexion.body);
+      var token = data['token'].toString();
+      localToken = token;
+      log(token);
+      Navigator.pushReplacementNamed(context, '/home');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Connexion impossible'),
+      ));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +96,9 @@ class ConnexionState extends State<Connexion> {
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    if (_formKey.currentState!.validate()) {}
+                    if (_formKey.currentState!.validate()) {
+                      afficheToken();
+                    }
                   },
                   child: const Text("Se connecter"),
                 ),
