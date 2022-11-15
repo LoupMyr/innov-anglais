@@ -25,6 +25,12 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         '/routeMenuTests': (BuildContext context) =>
             const MenuTestsPage(title: "Innov'Anglais - Tests"),
+        '/inscription': (BuildContext context) =>
+            const Inscription(title: "Innov'Anglais"),
+        '/connexion': (BuildContext context) =>
+            const Connexion(title: "Innov'Anglais"),
+        '/home': (BuildContext context) =>
+            const HomeScreen(title: "Innov'Anglais"),
       },
     );
   }
