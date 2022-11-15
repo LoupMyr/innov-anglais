@@ -62,11 +62,14 @@ class MenuTestsPageState extends State<MenuTestsPage> {
               ),
               borderRadius: const BorderRadius.all(Radius.circular(10)),
             ),
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width * 0.97,
-              height: MediaQuery.of(context).size.width * 0.15,
-              child: Center(
-                child: Text(_tests['hydra:member'][i]['niveau']),
+            child: ElevatedButton(
+              onPressed: () => lancerTest(i),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.87,
+                height: MediaQuery.of(context).size.width * 0.18,
+                child: Center(
+                  child: Text(_tests['hydra:member'][i]['niveau']),
+                ),
               ),
             ),
           ),
@@ -77,6 +80,8 @@ class MenuTestsPageState extends State<MenuTestsPage> {
       children: tab,
     );
   }
+
+  void lancerTest(id) {}
 
   @override
   Widget build(BuildContext context) {
@@ -103,14 +108,15 @@ class MenuTestsPageState extends State<MenuTestsPage> {
             ];
           } else if (snapshot.hasError) {
             children = <Widget>[
-              SpinKitCubeGrid(
+              const SpinKitCubeGrid(
                 color: Colors.red,
               )
             ];
           } else {
             children = <Widget>[
-              SpinKitCubeGrid(
+              const SpinKitCubeGrid(
                 color: Colors.orange,
+                size: 100,
               )
             ];
           }
