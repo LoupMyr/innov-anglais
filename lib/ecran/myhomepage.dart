@@ -93,7 +93,8 @@ class HomeScreenState extends State<HomeScreen> {
                 direction: Axis.vertical,
                 children: [
                   IconButton(
-                    onPressed: () => null,
+                    onPressed: () =>
+                        Navigator.pushNamed(context, "/routeTestPage"),
                     iconSize: 27.0,
                     icon: const Icon(
                       Icons.calendar_month_sharp,
