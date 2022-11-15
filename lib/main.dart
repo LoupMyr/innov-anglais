@@ -4,6 +4,7 @@ import 'package:innov_anglais/ecran/menuTests.dart';
 import 'package:innov_anglais/ecran/connexion.dart';
 import 'package:innov_anglais/ecran/inscription.dart';
 import 'package:innov_anglais/ecran/test.dart';
+import 'package:innov_anglais/ecran/wordlist.dart';
 import 'package:innov_anglais/splashscreen.dart';
 
 void main() {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.yellow,
       ),
       debugShowCheckedModeBanner: false,
-      home: const Connexion(title: "Connexion"),
+      home: const MyHomePage(title: "Innov'Anglais"),
       routes: <String, WidgetBuilder>{
         '/routeMenuTests': (BuildContext context) =>
             const MenuTestsPage(title: "Innov'Anglais - Tests"),
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
             const Connexion(title: "Connexion"),
         '/home': (BuildContext context) =>
             const HomeScreen(title: "Innov'Anglais"),
+        '/wordlist': (BuildContext context) => WordList(title: "Innov'Anglais"),
       },
     );
   }

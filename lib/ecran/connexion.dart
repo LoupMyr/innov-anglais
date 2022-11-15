@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:innov_anglais/class/api.dart';
 import 'dart:convert' as convert;
 import 'package:innov_anglais/ecran/myhomepage.dart';
 import 'package:innov_anglais/local.dart';
@@ -21,23 +22,8 @@ class ConnexionState extends State<Connexion> {
   String _password = "";
   bool _connexion = false;
 
-  Future<http.Response> recupConnect(String login, String mdp) {
-    return http.post(
-      Uri.parse(
-          'https://s3-4430.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/authentication_token'
-          //'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/authentication_token'
-          ),
-      headers: <String, String>{
-        'Accept': 'application/json; charset=UTF-8',
-        'Content-Type': 'application/json',
-      },
-      body: convert
-          .jsonEncode(<String, String>{'username': login, 'password': mdp}),
-    );
-  }
-
   void afficheToken() async {
-    var connexion = await recupConnect(_login, _password);
+    var connexion = await Api.recupConnect(_login, _password);
     log(_login);
     log(_password);
     if (connexion.statusCode == 200) {

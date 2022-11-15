@@ -55,6 +55,10 @@ class InscriptionState extends State<Inscription> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('Login déjà utilisé'),
       ));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Connexion au serveur impossible'),
+      ));
     }
   }
 
