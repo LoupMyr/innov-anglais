@@ -254,7 +254,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
-          onPressed: () => Navigator.pushNamed(context, '/routeMenuTests'),
+          onPressed: () => {Navigator.pushNamed(context, '/routeMenuTests')},
           label: const Text("Lancer votre première partie"),
           icon: const Icon(Icons.play_arrow)),
     );
