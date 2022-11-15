@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'dart:math';
 
 import 'package:http/http.dart' as http;
@@ -6,104 +5,83 @@ import 'dart:convert';
 import 'dart:async';
 
 class TestTools {
-  final Random rand = Random();
-  Mot motChoisi = Mot(francais: "oui", anglais: "yes", theme: "theme");
-  bool type = true;
+  Mot motChoisi = Mot(francais: "oui", anglais: "yes", themes: []);
   int count = 0;
   int score = 0;
+  //bool type = true;
+  bool get type => Random().nextInt(2) == 0;
 
-  //fabrique un questionaire pour le test
-  Widget makeTest() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(motChoisi.anglais),
-        const Padding(padding: EdgeInsets.all(50)),
-        type ? saisie() : boutons(),
-        const Padding(padding: EdgeInsets.all(50)),
-        Text("Score: $count"),
-      ],
+  Future<void> choisirMot() async {
+    //List<dynamic> listMots = await getMots();
+    //motChoisi = Mot.fromMap(listMots[0]);
+    await setMots();
+  }
+
+  Future<String> getToken() async {
+    String url =
+        "https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/authentication_token";
+    var reponse = await http.post(
+      Uri.parse(url),
+      headers: <String, String>{
+        'Accept': 'application/json; charset=UTF-8',
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(
+          <String, String>{'username': "tozano", 'password': "btsinfo"}),
     );
-  }
-
-  //retourne un qcm de 4 choix pour le questionaire
-  Widget boutons() {
-    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButton(
-              onPressed: () => checkResp("oui"), child: const Text("oui")),
-          const Padding(padding: EdgeInsets.all(10)),
-          ElevatedButton(
-              onPressed: () => checkResp("non"), child: const Text("non"))
-        ],
-      ),
-      const Padding(padding: EdgeInsets.all(10)),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButton(
-              onPressed: () => checkResp("peut etre"),
-              child: const Text("peut etre")),
-          const Padding(padding: EdgeInsets.all(10)),
-          ElevatedButton(
-              onPressed: () => checkResp("jamais"), child: const Text("jamais"))
-        ],
-      )
-    ]);
-  }
-
-  //retourne un champ de saisie pour le questionaire
-  Widget saisie() {
-    String input = "";
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(
-          width: 250,
-          child: TextFormField(
-            decoration: const InputDecoration(label: Text(' Reponse')),
-            onChanged: (value) => input = value,
-          ),
-        ),
-        const Padding(padding: EdgeInsets.all(10)),
-        ElevatedButton(
-            onPressed: () => checkResp(input), child: const Text("valider"))
-      ],
-    );
-  }
-
-  //verifie la reponse
-  void checkResp(String resp) {
-    //type = rand.nextInt(1) == 0;
-    if (resp == motChoisi.francais) {
-      score++;
+    if (reponse.statusCode == 200) {
+      return jsonDecode(reponse.body)["token"];
+    } else {
+      throw Exception("Erreur de token");
     }
-    count++;
-    if (count == 10) {}
+  }
+
+  Future<List<dynamic>> getMots() async {
+    String token = await getToken();
+    String url = "https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/mots";
+    var reponse = await http.get(Uri.parse(url), headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token'
+    });
+    if (reponse.statusCode == 200) {
+      return jsonDecode(reponse.body);
+    } else {
+      throw Exception("Erreur de connection a l'api");
+    }
+  }
+
+  Future<void> setMots() async {
+    String token = await getToken();
+    String url = "https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/mots";
+    var reponse = await http.post(Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token'
+        },
+        body: jsonEncode(
+          <String, dynamic>{
+            "motAnglais": "rice",
+            "motFrancais": "riz",
+            //"appartenir": [""]
+          },
+        ));
+    if (reponse.statusCode != 201) {
+      throw Exception("Erreur de connection a l'api");
+    }
   }
 }
 
 class Mot {
-  Mot({required this.francais, required this.anglais, required this.theme});
-  Mot.fromMap(Map<String, String> map) {
+  Mot({required this.francais, required this.anglais, required this.themes});
+  Mot.fromMap(Map<String, dynamic> map) {
     francais = map["francais"] ?? "";
     anglais = map["anglais"] ?? "";
-    theme = map["theme"] ?? "";
+    themes = map["theme"] ?? [];
   }
 
   late String francais;
   late String anglais;
-  late String theme;
-}
-
-Future<Map<String, dynamic>> getMots() async {
-  String url = "url";
-  var reponse = await http.get(Uri.parse(url));
-  if (reponse.statusCode == 200) {
-    return jsonDecode(reponse.body);
-  } else {
-    throw Exception("erreur de connection a l'api");
-  }
+  late List<String> themes;
 }
