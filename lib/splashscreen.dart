@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:innov_anglais/ecran/myhomepage.dart';
+import 'package:innov_anglais/main.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -16,34 +18,37 @@ class SplashScreenState extends State<MyHomePage> {
   void initState() {
     super.initState();
     Timer(
-        const Duration(seconds: 4),
+        const Duration(seconds: 6),
         () => Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => MyHomePage(
-                      title: "Innov'Anglais",
-                    ))));
+                builder: (context) => HomeScreen(title: 'innovanglais'))));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                color: Colors.red,
-              )
-            ],
+    return Center(
+      child: Column(
+        children: <Widget>[
+          Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            color: Color.fromARGB(255, 238, 215, 6),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                      child: SpinKitPouringHourGlass(
+                          color: Colors.black, size: 150)),
+                ],
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

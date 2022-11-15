@@ -111,6 +111,7 @@ class MenuTestsPageState extends State<MenuTestsPage> {
             children = <Widget>[
               SpinKitCubeGrid(
                 color: Colors.orange,
+                size: 100,
               )
             ];
           }
