@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:innov_anglais/class/api.dart';
 import 'dart:convert' as convert;
 import 'package:innov_anglais/ecran/myhomepage.dart';
 import 'package:innov_anglais/local.dart';
@@ -35,7 +36,7 @@ class ConnexionState extends State<Connexion> {
   }
 
   void afficheToken() async {
-    var connexion = await recupConnect(_login, _password);
+    var connexion = await Api.recupConnect(_login, _password);
     log(_login);
     log(_password);
     if (connexion.statusCode == 200) {
@@ -58,6 +59,19 @@ class ConnexionState extends State<Connexion> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: [
+          Padding(
+              padding: EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pushReplacementNamed(context, '/inscription');
+                },
+                child: Icon(
+                  Icons.account_circle_outlined,
+                  size: 26.0,
+                ),
+              )),
+        ],
       ),
       body: Center(
         child: Form(
