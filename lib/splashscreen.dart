@@ -8,8 +8,10 @@ class SplashScreenState extends State<MyHomePage> {
     super.initState();
     Timer(
         const Duration(seconds: 4),
-        () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => MyHomePage(title: 'zz'))));
+        () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => MyHomePage(title: 'innovanglais'))));
   }
 
   @override
@@ -18,9 +20,10 @@ class SplashScreenState extends State<MyHomePage> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
+        color: Colors.amber,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('lib/assets/bgor.png'),
+            image: AssetImage('lib/assets/innovAnglaisLogo.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -32,7 +35,7 @@ class SplashScreenState extends State<MyHomePage> {
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
-                child: Image.asset('lib/assets/beermakerlogo350.png'),
+                child: Image.asset('lib/assets/thumbnail.png'),
               )
             ],
           ),
