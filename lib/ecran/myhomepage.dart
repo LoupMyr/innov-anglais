@@ -83,7 +83,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   icon: Icon(Icons.arrow_drop_down))
                             ],
                           ),
-                          PageView.builder(
+                          /*PageView.builder(
                               itemCount: container.length,
                               pageSnapping: true,
                               itemBuilder: (context, pagePosition) {
@@ -98,7 +98,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         color: Colors.cyan.shade200),
                                   ),
                                 );
-                              }),
+                              }),*/
                           Row(
                             children: [
                               const Padding(padding: EdgeInsets.all(8)),
