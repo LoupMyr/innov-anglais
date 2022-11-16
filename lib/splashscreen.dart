@@ -23,7 +23,7 @@ class SplashScreenState extends State<MyHomePage> {
         () => Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => HomeScreen(title: 'Connexion'))));
+                builder: (context) => Connexion(title: 'Connexion'))));
   }
 
   @override

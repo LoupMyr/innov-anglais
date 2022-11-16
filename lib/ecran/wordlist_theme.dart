@@ -22,8 +22,6 @@ class WordListThemeState extends State<WordListTheme> {
 
   void recupData() async {
     var data2 = await api.getLists();
-    log('test');
-    log(data2.statusCode.toString());
     data = convert.jsonDecode(data2.body);
     setState(() {
       recupDataBool = true;
@@ -37,8 +35,6 @@ class WordListThemeState extends State<WordListTheme> {
         margin: const EdgeInsets.all(5.0),
         child: ElevatedButton(
           child: Text(data[index]['theme']),
-          style:
-              ElevatedButton.styleFrom(backgroundColor: Colors.cyan.shade200),
           onPressed: () =>
               {Navigator.pushNamed(context, "/wordlist", arguments: index + 1)},
         ));
