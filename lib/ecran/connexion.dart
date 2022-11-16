@@ -22,6 +22,19 @@ class ConnexionState extends State<Connexion> {
   String _password = "";
   bool _connexion = false;
 
+  Future<http.Response> recupConnect(String login, String mdp) {
+    return http.post(
+      Uri.parse(
+          'http://s3-4427.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/authentication_token'),
+      headers: <String, String>{
+        'Accept': 'application/json; charset=UTF-8',
+        'Content-Type': 'application/json',
+      },
+      body: convert
+          .jsonEncode(<String, String>{'username': login, 'password': mdp}),
+    );
+  }
+
   void afficheToken() async {
     var connexion = await Api.recupConnect(_login, _password);
     log(_login);

@@ -1,10 +1,8 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:audioplayers/audioplayers.dart';
 
 class JeuSons extends StatefulWidget {
   const JeuSons({super.key, required this.title});
@@ -16,8 +14,6 @@ class JeuSons extends StatefulWidget {
 }
 
 class JeuSonsState extends State<JeuSons> {
-  AudioPlayer player = AudioPlayer();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,18 +34,17 @@ class JeuSonsState extends State<JeuSons> {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Row(
               children: [
                 ElevatedButton(
-                  onPressed: () async {
-                    String audioasset = '../assets/dog.mp3';
-                    ByteData bytes = await rootBundle.load(audioasset);
-                    Uint8List soundbytes = bytes.buffer
-                        .asUint8List(bytes.offsetInBytes, bytes.lengthInBytes);
-                    int result = await player.playBytes(soundbytes);
-                  },
-                  child: Text('tt'),
+                  onPressed: () {},
+                  child: Container(
+                    height: 100,
+                    width: 100,
+                    child: Text("dog"),
+                  ),
                 ),
               ],
             ),
