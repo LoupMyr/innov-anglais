@@ -366,7 +366,8 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 direction: Axis.vertical,
                 children: [
                   IconButton(
-                    onPressed: () => null,
+                    onPressed: () =>
+                        Navigator.pushNamed(context, "/routeProfil"),
                     iconSize: 27.0,
                     icon: const Icon(
                       Icons.person_rounded,

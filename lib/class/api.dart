@@ -60,6 +60,31 @@ class Api {
     return lesMots;
   }
 
+  Future<http.Response> getUsers() async {
+    await UpdateToken();
+    return http.get(
+      Uri.parse(
+          'https://s3-4428.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/users'
+          //'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/mots'
+          ),
+      headers: <String, String>{
+        'Accept': 'application/json',
+        'Authorization': "Bearer " + localToken,
+      },
+    );
+  }
+
+  Future<dynamic> getUser() async {
+    var data = convert.jsonDecode((await getUsers()).body);
+    var user;
+    for (var elt in data) {
+      if (elt['username'] == localLogin) {
+        user = elt;
+      }
+    }
+    return user;
+  }
+
   Future<http.Response> getLists() async {
     await UpdateToken();
     return http.get(
