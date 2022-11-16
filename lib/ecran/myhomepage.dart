@@ -46,7 +46,6 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               scrollDirection: Axis.vertical,
               child: Container(
                 height: MediaQuery.of(context).size.height,
-                color: Colors.white,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,11 +60,9 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               fontSize: 20.0, fontWeight: FontWeight.bold),
                         ),
                         Padding(padding: EdgeInsets.all(10)),
-                        IconButton(
-                            onPressed: null, icon: Icon(Icons.arrow_drop_down))
                       ],
                     ),
-                    const Padding(padding: EdgeInsets.all(10)),
+                    const Padding(padding: EdgeInsets.all(20)),
                     CarouselSlider(
                         items: [
                           Container(
@@ -81,6 +78,32 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     ],
                                     begin: Alignment.topRight,
                                     end: Alignment.bottomLeft)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const Padding(padding: EdgeInsets.all(5)),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    const Padding(padding: EdgeInsets.all(5)),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 30,
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          color: Color.fromARGB(
+                                              255, 107, 226, 210)),
+                                      child: const Icon(Icons.explore),
+                                    ),
+                                  ],
+                                ),
+                                const Padding(padding: EdgeInsets.all(8)),
+                                const Text("Découvre en"),
+                                const Text("plus")
+                              ],
+                            ),
                           ),
                           Container(
                             alignment: Alignment.center,
@@ -135,18 +158,44 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     ],
                                     begin: Alignment.topRight,
                                     end: Alignment.bottomLeft)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const Padding(padding: EdgeInsets.all(5)),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    const Padding(padding: EdgeInsets.all(5)),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 30,
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          color: Color.fromARGB(
+                                              255, 170, 226, 107)),
+                                      child: const Icon(Icons.school),
+                                    ),
+                                  ],
+                                ),
+                                const Padding(padding: EdgeInsets.all(8)),
+                                const Text("Apprend"),
+                                const Text("de jour en jour")
+                              ],
+                            ),
                           ),
                         ],
                         options: CarouselOptions(
                           height: 120,
                           enlargeCenterPage: false,
                           autoPlay: true,
-                          autoPlayCurve: Curves.linear,
+                          autoPlayCurve: Curves.easeInOutCirc,
                           enableInfiniteScroll: true,
-                          autoPlayAnimationDuration: Duration(seconds: 15),
-                          viewportFraction: 0.5,
+                          autoPlayAnimationDuration: Duration(seconds: 5),
+                          viewportFraction: 0.8,
                         )),
-                    const Padding(padding: EdgeInsets.all(8)),
+                    const Padding(padding: EdgeInsets.all(20)),
                     Row(
                       children: const [
                         Padding(padding: EdgeInsets.all(10)),
@@ -156,11 +205,9 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               fontSize: 20.0, fontWeight: FontWeight.bold),
                         ),
                         Padding(padding: EdgeInsets.all(10)),
-                        IconButton(
-                            onPressed: null, icon: Icon(Icons.arrow_drop_down))
                       ],
                     ),
-                    const Padding(padding: EdgeInsets.all(10)),
+                    const Padding(padding: EdgeInsets.all(20)),
                     CarouselSlider(
                         items: [
                           Container(
@@ -310,13 +357,14 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           ),
                         ],
                         options: CarouselOptions(
+                          reverse: true,
                           height: 120,
                           enlargeCenterPage: false,
                           autoPlay: true,
-                          autoPlayCurve: Curves.linear,
+                          autoPlayCurve: Curves.easeInOutCirc,
                           enableInfiniteScroll: true,
-                          autoPlayAnimationDuration: Duration(seconds: 15),
-                          viewportFraction: 0.5,
+                          autoPlayAnimationDuration: Duration(seconds: 5),
+                          viewportFraction: 0.8,
                         )),
                   ],
                 ),

@@ -14,8 +14,8 @@ class Api {
   static Future<http.Response> recupConnect(String login, String mdp) {
     return http.post(
       Uri.parse(
-          //'https://s3-4430.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/authentication_token'
-          'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/authentication_token'),
+          'https://s3-4427.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/authentication_token'),
+      //'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/authentication_token'),
       headers: <String, String>{
         'Accept': 'application/json; charset=UTF-8',
         'Content-Type': 'application/json',
@@ -37,8 +37,9 @@ class Api {
     UpdateToken();
     return http.get(
       Uri.parse(
-          //'https://s3-4430.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/listes/' + id.toString()'
-          'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/mots'),
+          'https://s3-4427.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/listes/'),
+      /* + id.toString()'
+          'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/mots'),*/
       headers: <String, String>{
         'Accept': 'application/json',
         'Authorization': "Bearer " + localToken,
