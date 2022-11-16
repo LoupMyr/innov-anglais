@@ -9,6 +9,7 @@ import 'package:innov_anglais/ecran/test.dart';
 import 'package:innov_anglais/ecran/wordlist.dart';
 import 'package:innov_anglais/ecran/wordlist_theme.dart';
 import 'package:innov_anglais/splashscreen.dart';
+import 'package:innov_anglais/ecran/jeuSons.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.lightBlueAccent,
       ),
       debugShowCheckedModeBanner: false,
-      home: const Memory(title: "Innov'Anglais"),
+      home: const MyHomePage(title: "Innov'Anglais"),
       routes: <String, WidgetBuilder>{
         '/routeMenuTests': (BuildContext context) =>
             const MenuTestsPage(title: "Innov'Anglais - Tests"),
@@ -44,8 +45,9 @@ class MyApp extends StatelessWidget {
             WordListTheme(title: "Innov'Anglais"),
         '/routeClassement': (BuildContext context) =>
             ClassementPage(title: "Innov'Anglais"),
+        '/routeJeuSons': (BuildContext context) =>
+            JeuSons(title: "Innov'Anglais"),
       },
     );
   }
 }
-///routeClassement
