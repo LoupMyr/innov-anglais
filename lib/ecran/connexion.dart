@@ -1,10 +1,8 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:innov_anglais/class/api.dart';
 import 'dart:convert' as convert;
-import 'package:innov_anglais/ecran/myhomepage.dart';
 import 'package:innov_anglais/local.dart';
 
 class Connexion extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:innov_anglais/class/test_tool.dart';
+import 'package:innov_anglais/class/test.dart';
 import 'dart:math';
 
 class TestPage extends StatefulWidget {
@@ -122,8 +122,7 @@ class TestState extends State<TestPage> {
     setState(() {
       tool.count++;
     });
-    if (tool.count == 10) {
-      //gerer les score ici
+    if (tool.count >= 10) {
       Navigator.pop(context);
     }
   }

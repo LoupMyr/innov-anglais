@@ -1,8 +1,6 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:innov_anglais/class/memory.dart';
-import 'package:innov_anglais/class/test_tool.dart';
 
 class Memory extends StatefulWidget {
   const Memory({super.key, required this.title});
@@ -28,7 +26,7 @@ class MemoryState extends State<Memory> {
           width: MediaQuery.of(context).size.width / 4.6,
           height: MediaQuery.of(context).size.width / 4.6,
           margin: const EdgeInsets.all(5.0),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.lightBlueAccent,
           ),
           child: Column(

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:innov_anglais/class/api.dart';
-import 'package:innov_anglais/class/test_tool.dart';
-import 'package:innov_anglais/local.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
+import 'package:innov_anglais/class/test.dart';
 
 class WordList extends StatefulWidget {
   WordList({super.key, required this.title});
@@ -62,7 +59,7 @@ class WordListState extends State<WordList> {
                     height: 20,
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.lightBlueAccent)),
-                    child: Text('Anglais',
+                    child: const Text('Anglais',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontWeight: FontWeight.bold))),
                 Container(
@@ -70,7 +67,7 @@ class WordListState extends State<WordList> {
                     height: 20,
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.lightBlueAccent)),
-                    child: Text('Français',
+                    child: const Text('Français',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontWeight: FontWeight.bold))),
               ],

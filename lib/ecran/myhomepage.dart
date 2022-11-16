@@ -93,7 +93,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(100),
-                                          color: Color.fromARGB(
+                                          color: const Color.fromARGB(
                                               255, 107, 226, 210)),
                                       child: const Icon(Icons.explore),
                                     ),
@@ -133,7 +133,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(100),
-                                          color: Color.fromARGB(
+                                          color: const Color.fromARGB(
                                               255, 206, 197, 197)),
                                       child: const Icon(Icons.play_arrow),
                                     ),
@@ -173,7 +173,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(100),
-                                          color: Color.fromARGB(
+                                          color: const Color.fromARGB(
                                               255, 170, 226, 107)),
                                       child: const Icon(Icons.school),
                                     ),
@@ -192,7 +192,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           autoPlay: true,
                           autoPlayCurve: Curves.easeInOutCirc,
                           enableInfiniteScroll: true,
-                          autoPlayAnimationDuration: Duration(seconds: 5),
+                          autoPlayAnimationDuration: const Duration(seconds: 5),
                           viewportFraction: 0.8,
                         )),
                     const Padding(padding: EdgeInsets.all(20)),
@@ -227,9 +227,9 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Padding(padding: EdgeInsets.all(10)),
+                                const Padding(padding: EdgeInsets.all(10)),
                                 Row(
-                                  children: [
+                                  children: const [
                                     Padding(padding: EdgeInsets.all(5)),
                                     Text(
                                       "Débutant",
@@ -237,12 +237,12 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     )
                                   ],
                                 ),
-                                Padding(padding: EdgeInsets.all(10)),
+                                const Padding(padding: EdgeInsets.all(10)),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Container(
-                                      padding: EdgeInsets.all(5),
+                                      padding: const EdgeInsets.all(5),
                                       height: 30,
                                       width: 30,
                                       decoration: BoxDecoration(
@@ -275,9 +275,9 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Padding(padding: EdgeInsets.all(10)),
+                                const Padding(padding: EdgeInsets.all(10)),
                                 Row(
-                                  children: [
+                                  children: const [
                                     Padding(padding: EdgeInsets.all(5)),
                                     Text(
                                       "Avancé",
@@ -285,12 +285,12 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     )
                                   ],
                                 ),
-                                Padding(padding: EdgeInsets.all(10)),
+                                const Padding(padding: EdgeInsets.all(10)),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Container(
-                                      padding: EdgeInsets.all(5),
+                                      padding: const EdgeInsets.all(5),
                                       height: 30,
                                       width: 30,
                                       decoration: BoxDecoration(
@@ -323,9 +323,9 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Padding(padding: EdgeInsets.all(10)),
+                                const Padding(padding: EdgeInsets.all(10)),
                                 Row(
-                                  children: [
+                                  children: const [
                                     Padding(padding: EdgeInsets.all(5)),
                                     Text(
                                       "Expert",
@@ -333,7 +333,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     )
                                   ],
                                 ),
-                                Padding(padding: EdgeInsets.all(10)),
+                                const Padding(padding: EdgeInsets.all(10)),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [

@@ -1,4 +1,4 @@
-import 'package:innov_anglais/class/test_tool.dart';
+import 'package:innov_anglais/class/test.dart';
 import 'package:innov_anglais/local.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
@@ -13,9 +13,8 @@ class Api {
   static Future<http.Response> recupConnect(String login, String mdp) {
     return http.post(
       Uri.parse(
-          'https://s3-4428.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/authentication_token'),
-      //'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/authentication_token'),
-
+          //'https://s3-4428.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/authentication_token'),
+          'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/authentication_token'),
       headers: <String, String>{
         'Accept': 'application/json; charset=UTF-8',
         'Content-Type': 'application/json',
@@ -37,12 +36,11 @@ class Api {
     await UpdateToken();
     return http.get(
       Uri.parse(
-          'https://s3-4428.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/mots'
-          //'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/mots'
-          ),
+          //'https://s3-4428.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/mots'
+          'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/mots'),
       headers: <String, String>{
         'Accept': 'application/json',
-        'Authorization': "Bearer " + localToken,
+        'Authorization': "Bearer $localToken",
       },
     );
   }
@@ -52,7 +50,7 @@ class Api {
     List<dynamic> lesMots = [];
     for (var elt in data) {
       if (elt['appartenir'].contains(
-          '/Inno-v-Anglais/InovApi/public/api/listes/' + id.toString())) {
+          '/Inno-v-Anglais/InovApi/public/api/listes/${id.toString()}')) {
         lesMots.add(elt);
       }
     }
@@ -63,12 +61,11 @@ class Api {
     await UpdateToken();
     return http.get(
       Uri.parse(
-          'https://s3-4428.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/users'
-          //'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/mots'
-          ),
+          //'https://s3-4428.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/users'
+          'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/mots'),
       headers: <String, String>{
         'Accept': 'application/json',
-        'Authorization': "Bearer " + localToken,
+        'Authorization': "Bearer $localToken",
       },
     );
   }
@@ -88,12 +85,11 @@ class Api {
     await UpdateToken();
     return http.get(
       Uri.parse(
-          'https://s3-4428.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/listes/'
-          //'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/listes'
-          ),
+          //'https://s3-4428.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/listes/'
+          'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/listes'),
       headers: <String, String>{
         'Accept': 'application/json',
-        'Authorization': "Bearer " + localToken,
+        'Authorization': "Bearer $localToken",
       },
     );
   }
