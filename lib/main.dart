@@ -6,6 +6,7 @@ import 'package:innov_anglais/ecran/connexion.dart';
 import 'package:innov_anglais/ecran/inscription.dart';
 import 'package:innov_anglais/ecran/test.dart';
 import 'package:innov_anglais/ecran/wordlist.dart';
+import 'package:innov_anglais/ecran/wordlist_theme.dart';
 import 'package:innov_anglais/splashscreen.dart';
 
 void main() {
@@ -36,7 +37,12 @@ class MyApp extends StatelessWidget {
         '/home': (BuildContext context) =>
             const HomeScreen(title: "Innov'Anglais"),
         '/wordlist': (BuildContext context) => WordList(title: "Innov'Anglais"),
+        '/wordlistTheme': (BuildContext context) =>
+            WordListTheme(title: "Innov'Anglais"),
+        '/routeClassement': (BuildContext context) =>
+            ClassementPage(title: "Innov'Anglais"),
       },
     );
   }
 }
+///routeClassement

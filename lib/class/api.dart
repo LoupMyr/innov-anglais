@@ -58,4 +58,17 @@ class Api {
     }
     return lesMots;
   }
+
+  Future<http.Response> getLists() async {
+    UpdateToken();
+    return http.get(
+      Uri.parse(
+          //'https://s3-4430.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/listes/' + id.toString()'
+          'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/listes'),
+      headers: <String, String>{
+        'Accept': 'application/json',
+        'Authorization': "Bearer " + localToken,
+      },
+    );
+  }
 }

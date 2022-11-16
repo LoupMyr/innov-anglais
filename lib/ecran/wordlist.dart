@@ -15,11 +15,10 @@ class WordList extends StatefulWidget {
 
 class WordListState extends State<WordList> {
   Api api = Api();
-  int id = 1;
   List<dynamic> list = [];
   bool recupDataBool = false;
 
-  void recupData() async {
+  void recupData(int id) async {
     list = await api.getWordsByListId(id);
     setState(() {
       recupDataBool = true;
@@ -30,33 +29,58 @@ class WordListState extends State<WordList> {
     if (langue == 0) {
       return Container(
           width: MediaQuery.of(context).size.width / 2,
+          height: 20,
+          decoration: BoxDecoration(border: Border.all(color: Colors.black)),
           child: Text(list[index]['motAnglais'], textAlign: TextAlign.center));
     } else {
       return Container(
           width: MediaQuery.of(context).size.width / 2,
+          height: 20,
+          decoration: BoxDecoration(border: Border.all(color: Colors.black)),
           child: Text(list[index]['motFrancais'], textAlign: TextAlign.center));
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    var id = ModalRoute.of(context)?.settings.arguments as int;
     if (!recupDataBool) {
-      recupData();
+      recupData(id);
     }
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: Center(
-          child: Column(
-            children: List.generate(
+        body: SingleChildScrollView(
+          child: Column(children: [
+            Row(
+              children: [
+                Container(
+                    width: MediaQuery.of(context).size.width / 2,
+                    height: 20,
+                    decoration:
+                        BoxDecoration(border: Border.all(color: Colors.black)),
+                    child: Text('Anglais',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontWeight: FontWeight.bold))),
+                Container(
+                    width: MediaQuery.of(context).size.width / 2,
+                    height: 20,
+                    decoration:
+                        BoxDecoration(border: Border.all(color: Colors.black)),
+                    child: Text('Français',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontWeight: FontWeight.bold))),
+              ],
+            ),
+            ...List.generate(
               list.length,
               (y) => Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(2, (x) => buildText(y, x)),
               ),
             ),
-          ),
+          ]),
         ));
   }
 }
