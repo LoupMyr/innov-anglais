@@ -67,11 +67,11 @@ class ClassementPageState extends State<ClassementPage> {
           elevation: 0,
           shape: RoundedRectangleBorder(
             side: BorderSide(
-              color: Theme.of(context).colorScheme.onSecondary,
+              color: Theme.of(context).primaryColor,
             ),
             borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
-          child: SizedBox(
+          child: Container(
             width: MediaQuery.of(context).size.width * 0.87,
             height: MediaQuery.of(context).size.width * 0.20,
             child: Row(
