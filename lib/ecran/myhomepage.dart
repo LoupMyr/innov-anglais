@@ -1,6 +1,6 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:innov_anglais/splashscreen.dart';
-import 'package:innov_anglais/strings.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, required this.title});
@@ -12,175 +12,317 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  List<Container> container = [
-    Container(
-      alignment: Alignment.center,
-      height: 120,
-      width: 120,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10), color: Colors.cyan.shade200),
-    ),
-    Container(
-      alignment: Alignment.center,
-      height: 120,
-      width: 120,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10), color: Colors.cyan.shade200),
-    ),
-  ];
+  bool selected = false;
+  late PageController _pageController = PageController();
 
   @override
   void initState() {
     super.initState();
+    _pageController = PageController(viewportFraction: 0.8);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
-        slivers: [
-          SliverAppBar.large(
-            centerTitle: true,
-            flexibleSpace: const FlexibleSpaceBar(
-              background: Image(
-                image: AssetImage(
-                  ("lib/assets/innovAnglaisLogo.png"),
-                ),
+        slivers: <Widget>[
+          const SliverAppBar(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(40),
+                bottomRight: Radius.circular(40),
               ),
             ),
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(30),
-              bottomRight: Radius.circular(30),
-            )),
+            expandedHeight: 180.0,
+            flexibleSpace: FlexibleSpaceBar(
+              titlePadding: EdgeInsets.all(1),
+              centerTitle: true,
+              background:
+                  Image(image: AssetImage("lib/assets/innovAnglaisLogo.png")),
+            ),
           ),
           SliverToBoxAdapter(
             child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
+              scrollDirection: Axis.vertical,
               child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  color: Colors.white,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Padding(padding: EdgeInsets.all(5)),
-                          Row(
-                            children: const [
-                              Padding(padding: EdgeInsets.all(10)),
-                              Text(
-                                "Explorez",
-                                style: TextStyle(
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Padding(padding: EdgeInsets.all(10)),
-                              IconButton(
-                                  onPressed: null,
-                                  icon: Icon(Icons.arrow_drop_down))
-                            ],
+                height: MediaQuery.of(context).size.height,
+                color: Colors.white,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    const Padding(padding: EdgeInsets.all(20)),
+                    Row(
+                      children: const [
+                        Padding(padding: EdgeInsets.all(10)),
+                        Text(
+                          "Explorez",
+                          style: TextStyle(
+                              fontSize: 20.0, fontWeight: FontWeight.bold),
+                        ),
+                        Padding(padding: EdgeInsets.all(10)),
+                        IconButton(
+                            onPressed: null, icon: Icon(Icons.arrow_drop_down))
+                      ],
+                    ),
+                    const Padding(padding: EdgeInsets.all(10)),
+                    CarouselSlider(
+                        items: [
+                          Container(
+                            alignment: Alignment.center,
+                            height: 120,
+                            width: 120,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Colors.blue.shade200,
+                                      Colors.cyan.shade300,
+                                    ],
+                                    begin: Alignment.topRight,
+                                    end: Alignment.bottomLeft)),
                           ),
-                          /*PageView.builder(
-                              itemCount: container.length,
-                              pageSnapping: true,
-                              itemBuilder: (context, pagePosition) {
-                                return Container(
-                                  margin: EdgeInsets.all(10),
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    height: 120,
-                                    width: 120,
-                                    decoration: BoxDecoration(
+                          Container(
+                            alignment: Alignment.center,
+                            height: 120,
+                            width: 120,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Colors.orange.shade200,
+                                      Colors.yellow.shade300,
+                                    ],
+                                    begin: Alignment.topRight,
+                                    end: Alignment.bottomLeft)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const Padding(padding: EdgeInsets.all(5)),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    const Padding(padding: EdgeInsets.all(5)),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 30,
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          color: Color.fromARGB(
+                                              255, 206, 197, 197)),
+                                      child: const Icon(Icons.play_arrow),
+                                    ),
+                                  ],
+                                ),
+                                const Padding(padding: EdgeInsets.all(8)),
+                                const Text("Jouer"),
+                                const Text("en s'amusant")
+                              ],
+                            ),
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            height: 120,
+                            width: 120,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Colors.green.shade200,
+                                      Colors.green.shade300,
+                                    ],
+                                    begin: Alignment.topRight,
+                                    end: Alignment.bottomLeft)),
+                          ),
+                        ],
+                        options: CarouselOptions(
+                          height: 120,
+                          enlargeCenterPage: false,
+                          autoPlay: true,
+                          autoPlayCurve: Curves.linear,
+                          enableInfiniteScroll: true,
+                          autoPlayAnimationDuration: Duration(seconds: 15),
+                          viewportFraction: 0.5,
+                        )),
+                    const Padding(padding: EdgeInsets.all(8)),
+                    Row(
+                      children: const [
+                        Padding(padding: EdgeInsets.all(10)),
+                        Text(
+                          "Faîtes vos premiers pas",
+                          style: TextStyle(
+                              fontSize: 20.0, fontWeight: FontWeight.bold),
+                        ),
+                        Padding(padding: EdgeInsets.all(10)),
+                        IconButton(
+                            onPressed: null, icon: Icon(Icons.arrow_drop_down))
+                      ],
+                    ),
+                    const Padding(padding: EdgeInsets.all(10)),
+                    CarouselSlider(
+                        items: [
+                          Container(
+                            alignment: Alignment.center,
+                            height: 120,
+                            width: 120,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Colors.orange,
+                                      Colors.yellow.shade300,
+                                    ],
+                                    begin: Alignment.topRight,
+                                    end: Alignment.bottomLeft)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(padding: EdgeInsets.all(10)),
+                                Row(
+                                  children: [
+                                    Padding(padding: EdgeInsets.all(5)),
+                                    Text(
+                                      "Débutant",
+                                      style: TextStyle(fontSize: 15.0),
+                                    )
+                                  ],
+                                ),
+                                Padding(padding: EdgeInsets.all(10)),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(5),
+                                      height: 30,
+                                      width: 30,
+                                      decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
-                                        color: Colors.cyan.shade200),
-                                  ),
-                                );
-                              }),*/
-                          Row(
-                            children: [
-                              const Padding(padding: EdgeInsets.all(8)),
-                              Container(
-                                alignment: Alignment.center,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.185,
-                                width: 120,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.cyan.shade200),
-                              ),
-                              const Padding(padding: EdgeInsets.all(5)),
-                              Container(
-                                alignment: Alignment.center,
-                                height: 120,
-                                width: 120,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.cyan.shade200),
-                              ),
-                              const Padding(padding: EdgeInsets.all(5)),
-                              Container(
-                                alignment: Alignment.center,
-                                height: 120,
-                                width: 120,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.cyan.shade200),
-                              ),
-                            ],
+                                        color: Colors.red.shade300,
+                                      ),
+                                      child: const Text(
+                                        "1",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
-                          const Padding(padding: EdgeInsets.all(8)),
-                          Row(
-                            children: const [
-                              Padding(padding: EdgeInsets.all(10)),
-                              Text(
-                                "Faîtes vos premiers pas",
-                                style: TextStyle(
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Padding(padding: EdgeInsets.all(10)),
-                              IconButton(
-                                  onPressed: null,
-                                  icon: Icon(Icons.arrow_drop_down))
-                            ],
+                          Container(
+                            alignment: Alignment.center,
+                            height: 120,
+                            width: 120,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Colors.green,
+                                      Colors.green.shade200,
+                                    ],
+                                    begin: Alignment.topRight,
+                                    end: Alignment.bottomLeft)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Padding(padding: EdgeInsets.all(10)),
+                                Row(
+                                  children: [
+                                    Padding(padding: EdgeInsets.all(5)),
+                                    Text(
+                                      "Avancé",
+                                      style: TextStyle(fontSize: 15.0),
+                                    )
+                                  ],
+                                ),
+                                Padding(padding: EdgeInsets.all(10)),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(5),
+                                      height: 30,
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.red.shade300,
+                                      ),
+                                      child: const Text(
+                                        "2",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
-                          Row(
-                            children: [
-                              const Padding(padding: EdgeInsets.all(8)),
-                              Container(
-                                alignment: Alignment.center,
-                                height: 120,
-                                width: 120,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.cyan.shade200),
-                              ),
-                              const Padding(padding: EdgeInsets.all(5)),
-                              Container(
-                                alignment: Alignment.center,
-                                height: 120,
-                                width: 120,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.cyan.shade200),
-                              ),
-                              const Padding(padding: EdgeInsets.all(5)),
-                              Container(
-                                alignment: Alignment.center,
-                                height: 120,
-                                width: 120,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.cyan.shade200),
-                              ),
-                            ],
+                          Container(
+                            alignment: Alignment.center,
+                            height: 120,
+                            width: 120,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Colors.grey.shade700,
+                                      Colors.grey.shade300,
+                                    ],
+                                    begin: Alignment.topRight,
+                                    end: Alignment.bottomLeft)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Padding(padding: EdgeInsets.all(10)),
+                                Row(
+                                  children: [
+                                    Padding(padding: EdgeInsets.all(5)),
+                                    Text(
+                                      "Expert",
+                                      style: TextStyle(fontSize: 15.0),
+                                    )
+                                  ],
+                                ),
+                                Padding(padding: EdgeInsets.all(10)),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(5),
+                                      height: 30,
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.red.shade300,
+                                      ),
+                                      child: const Text(
+                                        "3",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ]),
-                  )),
+                        ],
+                        options: CarouselOptions(
+                          height: 120,
+                          enlargeCenterPage: false,
+                          autoPlay: true,
+                          autoPlayCurve: Curves.linear,
+                          enableInfiniteScroll: true,
+                          autoPlayAnimationDuration: Duration(seconds: 15),
+                          viewportFraction: 0.5,
+                        )),
+                  ],
+                ),
+              ),
             ),
-          )
+          ),
         ],
       ),
       bottomNavigationBar: BottomAppBar(
@@ -261,9 +403,5 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           label: const Text("Lancer votre première partie"),
           icon: const Icon(Icons.play_arrow)),
     );
-  }
-
-  Widget _gameContainer() {
-    return Container();
   }
 }

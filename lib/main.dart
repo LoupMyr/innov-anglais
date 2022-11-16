@@ -38,6 +38,8 @@ class MyApp extends StatelessWidget {
         '/routeClassement': (BuildContext context) =>
             const ClassementPage(title: "Innov'Anglais"),
         '/wordlist': (BuildContext context) => WordList(title: "Innov'Anglais"),
+        '/routeClassement': (BuildContext context) =>
+            ClassementPage(title: "Classement"),
       },
     );
   }
