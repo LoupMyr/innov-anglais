@@ -39,10 +39,14 @@ class ClassementPageState extends State<ClassementPage> {
     List tabUser = [];
     List<Widget> tabChildren = [];
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < _users['hydra:totalItems']; i++) {
       tabUser.add(_users['hydra:member'][i]);
     }
-    for (int i = 0; i < tabUser.length; i++) {
+    int nbIterations = 3;
+    if (tabUser.length < 3) {
+      nbIterations = tabUser.length;
+    }
+    for (int i = 0; i < nbIterations; i++) {
       for (int j = i + 1; j < tabUser.length; j++) {
         if (tabUser[i]['scoreTotal'] < tabUser[j]['scoreTotal']) {
           var temp = tabUser[i];
@@ -51,7 +55,7 @@ class ClassementPageState extends State<ClassementPage> {
         }
       }
     }
-    for (int i = 0; i < tabUser.length; i++) {
+    for (int i = 0; i < nbIterations; i++) {
       AssetImage img = AssetImage('lib/assets/innovAnglaisLogo.png');
       if (i == 0) {
         img = AssetImage('lib/assets/goldMedal.png');

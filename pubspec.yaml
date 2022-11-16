@@ -39,6 +39,8 @@ dependencies:
   http: ^0.13.5
   flutter_spinkit: ^5.1.0
   carousel_slider: ^4.1.1
+  assets_audio_player: ^3.0.5
+  audioplayers: ^0.20.1
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +73,7 @@ flutter:
     - lib/assets/goldMedal.png
     - lib/assets/silverMedal.png
     - lib/assets/bronzeMedal.png
+    - lib/assets/dog.mp3
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
