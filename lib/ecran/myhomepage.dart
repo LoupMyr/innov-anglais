@@ -61,8 +61,6 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               fontSize: 20.0, fontWeight: FontWeight.bold),
                         ),
                         Padding(padding: EdgeInsets.all(10)),
-                        IconButton(
-                            onPressed: null, icon: Icon(Icons.arrow_drop_down))
                       ],
                     ),
                     const Padding(padding: EdgeInsets.all(10)),
@@ -141,10 +139,10 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           height: 120,
                           enlargeCenterPage: false,
                           autoPlay: true,
-                          autoPlayCurve: Curves.linear,
+                          autoPlayCurve: Curves.easeInOutCirc,
                           enableInfiniteScroll: true,
-                          autoPlayAnimationDuration: Duration(seconds: 15),
-                          viewportFraction: 0.5,
+                          autoPlayAnimationDuration: Duration(seconds: 5),
+                          viewportFraction: 0.8,
                         )),
                     const Padding(padding: EdgeInsets.all(8)),
                     Row(
@@ -156,8 +154,6 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               fontSize: 20.0, fontWeight: FontWeight.bold),
                         ),
                         Padding(padding: EdgeInsets.all(10)),
-                        IconButton(
-                            onPressed: null, icon: Icon(Icons.arrow_drop_down))
                       ],
                     ),
                     const Padding(padding: EdgeInsets.all(10)),
@@ -313,10 +309,11 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           height: 120,
                           enlargeCenterPage: false,
                           autoPlay: true,
-                          autoPlayCurve: Curves.linear,
+                          autoPlayCurve: Curves.easeInOutCirc,
                           enableInfiniteScroll: true,
-                          autoPlayAnimationDuration: Duration(seconds: 15),
-                          viewportFraction: 0.5,
+                          autoPlayAnimationDuration: Duration(seconds: 5),
+                          viewportFraction: 0.8,
+                          reverse: true,
                         )),
                   ],
                 ),
