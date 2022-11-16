@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:innov_anglais/ecran/classement.dart';
+import 'package:innov_anglais/ecran/memory.dart';
 import 'package:innov_anglais/ecran/myhomepage.dart';
 import 'package:innov_anglais/ecran/menuTests.dart';
 import 'package:innov_anglais/ecran/connexion.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.lightBlueAccent,
       ),
       debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: "Innov'Anglais"),
+      home: const Memory(title: "Innov'Anglais"),
       routes: <String, WidgetBuilder>{
         '/routeMenuTests': (BuildContext context) =>
             const MenuTestsPage(title: "Innov'Anglais - Tests"),
