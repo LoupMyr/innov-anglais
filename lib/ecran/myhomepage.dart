@@ -25,58 +25,50 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(40),
-            bottomRight: Radius.circular(40),
-          ),
-        ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 100,
-              width: 100,
-              child: Image(
-                image: AssetImage("lib/assets/innovAnglaisLogo.png"),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          const SliverAppBar(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(40),
+                bottomRight: Radius.circular(40),
               ),
             ),
-            Text("Innov'Anglais")
-          ],
-        ),
-      ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(children: [
-          SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
+            expandedHeight: 180.0,
+            flexibleSpace: FlexibleSpaceBar(
+              titlePadding: EdgeInsets.all(1),
+              centerTitle: true,
+              background:
+                  Image(image: AssetImage("lib/assets/innovAnglaisLogo.png")),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
               child: Container(
                 height: MediaQuery.of(context).size.height,
                 color: Colors.white,
                 child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(padding: EdgeInsets.all(5)),
-                      Row(
-                        children: const [
-                          Padding(padding: EdgeInsets.all(10)),
-                          Text(
-                            "Explorez",
-                            style: TextStyle(
-                                fontSize: 20.0, fontWeight: FontWeight.bold),
-                          ),
-                          Padding(padding: EdgeInsets.all(10)),
-                          IconButton(
-                              onPressed: null,
-                              icon: Icon(Icons.arrow_drop_down))
-                        ],
-                      ),
-                      _caroussel(),
-                      Row(
-                        children: [
-                          const Padding(padding: EdgeInsets.all(8)),
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    const Padding(padding: EdgeInsets.all(20)),
+                    Row(
+                      children: const [
+                        Padding(padding: EdgeInsets.all(10)),
+                        Text(
+                          "Explorez",
+                          style: TextStyle(
+                              fontSize: 20.0, fontWeight: FontWeight.bold),
+                        ),
+                        Padding(padding: EdgeInsets.all(10)),
+                        IconButton(
+                            onPressed: null, icon: Icon(Icons.arrow_drop_down))
+                      ],
+                    ),
+                    const Padding(padding: EdgeInsets.all(10)),
+                    CarouselSlider(
+                        items: [
                           Container(
                             alignment: Alignment.center,
                             height: 120,
@@ -85,50 +77,93 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 borderRadius: BorderRadius.circular(10),
                                 gradient: LinearGradient(
                                     colors: [
-                                      Colors.blue,
-                                      Colors.cyan,
+                                      Colors.blue.shade200,
+                                      Colors.cyan.shade300,
                                     ],
                                     begin: Alignment.topRight,
                                     end: Alignment.bottomLeft)),
                           ),
-                          const Padding(padding: EdgeInsets.all(5)),
                           Container(
                             alignment: Alignment.center,
                             height: 120,
                             width: 120,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                color: Colors.cyan.shade200),
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Colors.orange.shade200,
+                                      Colors.yellow.shade300,
+                                    ],
+                                    begin: Alignment.topRight,
+                                    end: Alignment.bottomLeft)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const Padding(padding: EdgeInsets.all(5)),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    const Padding(padding: EdgeInsets.all(5)),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 30,
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          color: Color.fromARGB(
+                                              255, 206, 197, 197)),
+                                      child: const Icon(Icons.play_arrow),
+                                    ),
+                                  ],
+                                ),
+                                const Padding(padding: EdgeInsets.all(8)),
+                                const Text("Jouer"),
+                                const Text("en s'amusant")
+                              ],
+                            ),
                           ),
-                          const Padding(padding: EdgeInsets.all(5)),
                           Container(
                             alignment: Alignment.center,
                             height: 120,
                             width: 120,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                color: Colors.cyan.shade200),
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Colors.green.shade200,
+                                      Colors.green.shade300,
+                                    ],
+                                    begin: Alignment.topRight,
+                                    end: Alignment.bottomLeft)),
                           ),
                         ],
-                      ),
-                      const Padding(padding: EdgeInsets.all(8)),
-                      Row(
-                        children: const [
-                          Padding(padding: EdgeInsets.all(10)),
-                          Text(
-                            "Faîtes vos premiers pas",
-                            style: TextStyle(
-                                fontSize: 20.0, fontWeight: FontWeight.bold),
-                          ),
-                          Padding(padding: EdgeInsets.all(10)),
-                          IconButton(
-                              onPressed: null,
-                              icon: Icon(Icons.arrow_drop_down))
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          const Padding(padding: EdgeInsets.all(8)),
+                        options: CarouselOptions(
+                          height: 120,
+                          enlargeCenterPage: false,
+                          autoPlay: true,
+                          autoPlayCurve: Curves.linear,
+                          enableInfiniteScroll: true,
+                          autoPlayAnimationDuration: Duration(seconds: 15),
+                          viewportFraction: 0.5,
+                        )),
+                    const Padding(padding: EdgeInsets.all(8)),
+                    Row(
+                      children: const [
+                        Padding(padding: EdgeInsets.all(10)),
+                        Text(
+                          "Faîtes vos premiers pas",
+                          style: TextStyle(
+                              fontSize: 20.0, fontWeight: FontWeight.bold),
+                        ),
+                        Padding(padding: EdgeInsets.all(10)),
+                        IconButton(
+                            onPressed: null, icon: Icon(Icons.arrow_drop_down))
+                      ],
+                    ),
+                    const Padding(padding: EdgeInsets.all(10)),
+                    CarouselSlider(
+                        items: [
                           Container(
                             alignment: Alignment.center,
                             height: 120,
@@ -178,7 +213,6 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               ],
                             ),
                           ),
-                          const Padding(padding: EdgeInsets.all(5)),
                           Container(
                             alignment: Alignment.center,
                             height: 120,
@@ -227,7 +261,6 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               ],
                             ),
                           ),
-                          const Padding(padding: EdgeInsets.all(5)),
                           Container(
                             alignment: Alignment.center,
                             height: 120,
@@ -277,10 +310,21 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             ),
                           ),
                         ],
-                      ),
-                    ]),
-              )),
-        ]),
+                        options: CarouselOptions(
+                          height: 120,
+                          enlargeCenterPage: false,
+                          autoPlay: true,
+                          autoPlayCurve: Curves.linear,
+                          enableInfiniteScroll: true,
+                          autoPlayAnimationDuration: Duration(seconds: 15),
+                          viewportFraction: 0.5,
+                        )),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: BottomAppBar(
         shape: const AutomaticNotchedShape(
@@ -358,36 +402,5 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           label: const Text("Lancer votre première partie"),
           icon: const Icon(Icons.play_arrow)),
     );
-  }
-
-  Widget _caroussel() {
-    List<Container> container = [
-      Container(
-        height: 120,
-        width: 120,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.cyan,
-        ),
-      ),
-      Container(
-        height: 120,
-        width: 120,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.cyan,
-        ),
-      ),
-    ];
-    return PageView.builder(
-        itemCount: container.length,
-        pageSnapping: true,
-        controller: _pageController,
-        itemBuilder: (context, pagePosition) {
-          return Container(
-            margin: EdgeInsets.all(10),
-            child: container[pagePosition],
-          );
-        });
   }
 }

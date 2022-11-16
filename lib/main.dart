@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Innov Anglais',
       theme: ThemeData(
-        primarySwatch: Colors.yellow,
+        primaryColor: Colors.lightBlueAccent,
       ),
       debugShowCheckedModeBanner: false,
       home: const MyHomePage(title: "Innov'Anglais"),
@@ -36,6 +36,8 @@ class MyApp extends StatelessWidget {
         '/home': (BuildContext context) =>
             const HomeScreen(title: "Innov'Anglais"),
         '/wordlist': (BuildContext context) => WordList(title: "Innov'Anglais"),
+        '/routeClassement': (BuildContext context) =>
+            ClassementPage(title: "Classement"),
       },
     );
   }
