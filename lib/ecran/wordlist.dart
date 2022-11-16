@@ -30,13 +30,15 @@ class WordListState extends State<WordList> {
       return Container(
           width: MediaQuery.of(context).size.width / 2,
           height: 20,
-          decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+          decoration:
+              BoxDecoration(border: Border.all(color: Colors.lightBlueAccent)),
           child: Text(list[index]['motAnglais'], textAlign: TextAlign.center));
     } else {
       return Container(
           width: MediaQuery.of(context).size.width / 2,
           height: 20,
-          decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+          decoration:
+              BoxDecoration(border: Border.all(color: Colors.lightBlueAccent)),
           child: Text(list[index]['motFrancais'], textAlign: TextAlign.center));
     }
   }
@@ -58,16 +60,16 @@ class WordListState extends State<WordList> {
                 Container(
                     width: MediaQuery.of(context).size.width / 2,
                     height: 20,
-                    decoration:
-                        BoxDecoration(border: Border.all(color: Colors.black)),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.lightBlueAccent)),
                     child: Text('Anglais',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontWeight: FontWeight.bold))),
                 Container(
                     width: MediaQuery.of(context).size.width / 2,
                     height: 20,
-                    decoration:
-                        BoxDecoration(border: Border.all(color: Colors.black)),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.lightBlueAccent)),
                     child: Text('Français',
                         textAlign: TextAlign.center,
                         style: TextStyle(fontWeight: FontWeight.bold))),
