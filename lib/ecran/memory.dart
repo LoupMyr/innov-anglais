@@ -16,32 +16,46 @@ class MemoryState extends State<Memory> {
   MemoryGame memory = MemoryGame();
 
   Widget buildContainer(int x, int y) {
-    return Container(
-        width: MediaQuery.of(context).size.width / 4.6,
-        height: MediaQuery.of(context).size.width / 4.6,
-        margin: const EdgeInsets.all(5.0),
-        decoration: BoxDecoration(
-          color: Colors.lightBlueAccent,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  memory.laGrille[x][y].toString(),
-                  textAlign: TextAlign.center,
-                )
-              ],
-            )
-          ],
+    return GestureDetector(
+        onTap: () => {
+              setState(() {
+                if (memory.laGrilleRetourne[x][y] == false) {
+                  memory.retourne(x, y);
+                }
+              }),
+            },
+        child: Container(
+          width: MediaQuery.of(context).size.width / 4.6,
+          height: MediaQuery.of(context).size.width / 4.6,
+          margin: const EdgeInsets.all(5.0),
+          decoration: BoxDecoration(
+            color: Colors.lightBlueAccent,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  memory.laGrilleRetourne[x][y]
+                      ? memory.laGrille[x][y] > 7
+                          ? Image(
+                              width: MediaQuery.of(context).size.width / 4.6,
+                              height: MediaQuery.of(context).size.width / 4.6,
+                              image: AssetImage(
+                                memory.donneImage(memory.laGrille[x][y]),
+                              ))
+                          : Text(memory.donneNom(memory.laGrille[x][y]))
+                      : Container()
+                ],
+              )
+            ],
+          ),
         ));
   }
 
   @override
   Widget build(BuildContext context) {
-    memory.initGrille();
     log(memory.laGrille.toString());
     return Scaffold(
       appBar: AppBar(
