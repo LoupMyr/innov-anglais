@@ -7,14 +7,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:innov_anglais/ecran/test_tool.dart';
+import 'package:innov_anglais/class/test_tool.dart';
 
 void main() {
   test("api", () async {
     TestTools tool = TestTools();
-    var token = await tool.getToken();
-    print(token);
-    var test = await tool.getMots();
+    // var token = await tool.getToken();
+    //print(token);
     /*expect(test, isNotNull);
     expect(test[0], isNotNull);
     Mot monmot = Mot.fromMap(test[0]);

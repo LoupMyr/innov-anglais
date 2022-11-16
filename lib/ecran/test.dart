@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:innov_anglais/ecran/test_tool.dart';
+import 'package:innov_anglais/class/test_tool.dart';
+import 'dart:math';
 
 class TestPage extends StatefulWidget {
   const TestPage({super.key, required this.title});
@@ -10,29 +11,54 @@ class TestPage extends StatefulWidget {
 }
 
 class TestState extends State<TestPage> {
-  final TestTools tool = TestTools();
+  TestTools tool = TestTools();
+  late Widget monBody;
+  bool get typeDeSaisie => Random().nextInt(2) == 0;
 
+  //permet d'aficher un message de chargement le temps d'initialiser les outils
+  @override
+  initState() {
+    monBody = FutureBuilder(
+        future: tool.initTools(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return testBody();
+          } else {
+            return const Text("chargement");
+          }
+        });
+    super.initState();
+  }
+
+  //permet de s'assurer que la saisie de met bien a jour a chaque changement de mot
+  @override
+  void setState(VoidCallback fn) {
+    monBody = testBody();
+    super.setState(fn);
+  }
+
+  //interface
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(tool.motChoisi.anglais),
-            const Padding(padding: EdgeInsets.all(50)),
-            tool.type ? saisie() : boutons(),
-            const Padding(padding: EdgeInsets.all(50)),
-            Text("Score: ${tool.score}"),
-          ],
-        ),
-      ),
-      //bouton pour debug
-      /*floatingActionButton: FloatingActionButton(
-          onPressed: () => setState(() => tool.type = !tool.type)),*/
+      body: Center(child: monBody),
+    );
+  }
+
+  //retourne un questionaire avec un champ au hasard
+  Widget testBody() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(tool.motChoisi.anglais),
+        const Padding(padding: EdgeInsets.all(50)),
+        typeDeSaisie ? saisie() : boutons(),
+        const Padding(padding: EdgeInsets.all(50)),
+        Text("Score: ${tool.score}"),
+      ],
     );
   }
 
@@ -63,10 +89,11 @@ class TestState extends State<TestPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ElevatedButton(
-              onPressed: () => checkResp("oui"), child: const Text("oui")),
+              onPressed: () => checkResp(tool.qcm[0]),
+              child: Text(tool.qcm[0])),
           const Padding(padding: EdgeInsets.all(10)),
           ElevatedButton(
-              onPressed: () => checkResp("non"), child: const Text("non"))
+              onPressed: () => checkResp(tool.qcm[1]), child: Text(tool.qcm[1]))
         ],
       ),
       const Padding(padding: EdgeInsets.all(10)),
@@ -74,26 +101,29 @@ class TestState extends State<TestPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ElevatedButton(
-              onPressed: () => checkResp("peut etre"),
-              child: const Text("peut etre")),
+              onPressed: () => checkResp(tool.qcm[2]),
+              child: Text(tool.qcm[2])),
           const Padding(padding: EdgeInsets.all(10)),
           ElevatedButton(
-              onPressed: () => checkResp("jamais"), child: const Text("jamais"))
+              onPressed: () => checkResp(tool.qcm[3]), child: Text(tool.qcm[3]))
         ],
       )
     ]);
   }
 
   //verifie la reponse
-  void checkResp(String resp) async {
+  void checkResp(String resp) {
     if (resp == tool.motChoisi.francais) {
-      tool.score++;
+      setState(() {
+        tool.score++;
+      });
     }
-    await tool.choisirMot();
+    tool.choisirMot();
     setState(() {
       tool.count++;
     });
     if (tool.count == 10) {
+      //gerer les score ici
       Navigator.pop(context);
     }
   }

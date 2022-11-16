@@ -1,3 +1,3 @@
-String localLogin = "";
-String localPassword = "";
+String localLogin = "tozano";
+String localPassword = "btsinfo";
 String localToken = "";

@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:innov_anglais/class/test_tool.dart';
 import 'package:innov_anglais/local.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
@@ -97,5 +96,48 @@ class Api {
         'Authorization': "Bearer " + localToken,
       },
     );
+  }
+
+  //obtiens la liste des mots ayant un theme donne
+  Future<List<Mot>> getWordsByTheme({required String theme}) async {
+    await UpdateToken();
+    var reponse = await http.get(
+        Uri.parse("https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/listes"),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $localToken'
+        });
+    if (reponse.statusCode == 200) {
+      for (var liste in convert.jsonDecode(reponse.body)) {
+        if (liste['theme'] == theme) {
+          int id = liste['id'];
+          var reponse = await http.get(
+              Uri.parse(
+                  "https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/mots"),
+              headers: <String, String>{
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer $localToken'
+              });
+          if (reponse.statusCode == 200) {
+            List<Mot> mesMots = [];
+            List apiMots = convert.jsonDecode(reponse.body);
+            for (var mot in apiMots) {
+              for (var theme in mot['appartenir']) {
+                if (theme == '/Inno-v-Anglais/public/api/listes/$id') {
+                  mesMots.add(Mot.fromMap(mot));
+                }
+              }
+            }
+            return mesMots;
+          }
+        }
+      }
+      print("Error: no such theme!");
+      return [];
+    } else {
+      throw Exception("Error: Api sent Code: ${reponse.statusCode}");
+    }
   }
 }
