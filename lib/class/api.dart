@@ -37,7 +37,7 @@ class Api {
     UpdateToken();
     return http.get(
       Uri.parse(
-          'https://s3-4427.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/listes/'),
+          'https://s3-4427.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/mots'),
       /* + id.toString()'
           'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/mots'),*/
       headers: <String, String>{
@@ -50,13 +50,27 @@ class Api {
   Future<List<dynamic>> getWordsByListId(int id) async {
     var data = convert.jsonDecode((await getMots()).body);
     List<dynamic> lesMots = [];
-
+    log(data.toString());
     for (var elt in data) {
-      if (elt['appartenir']
-          .contains('/Inno-v-Anglais/public/api/listes/' + id.toString())) {
+      if (elt['appartenir'].contains(
+          '/Inno-v-Anglais/InovApi/public/api/listes/' + id.toString())) {
         lesMots.add(elt);
       }
     }
     return lesMots;
+  }
+
+  Future<http.Response> getLists() async {
+    UpdateToken();
+    return http.get(
+      Uri.parse(
+          'https://s3-4427.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/listes/'
+          //'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/listes'
+          ),
+      headers: <String, String>{
+        'Accept': 'application/json',
+        'Authorization': "Bearer " + localToken,
+      },
+    );
   }
 }
