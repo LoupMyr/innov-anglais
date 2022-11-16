@@ -433,13 +433,13 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 children: [
                   IconButton(
                     onPressed: () =>
-                        {Navigator.pushNamed(context, '/routeClassement')},
+                        {Navigator.pushNamed(context, '/routeMemory')},
                     iconSize: 27.0,
                     icon: const Icon(
-                      Icons.info,
+                      Icons.photo,
                     ),
                   ),
-                  const Text("Classement"),
+                  const Text("Memory"),
                 ],
               ),
               Wrap(

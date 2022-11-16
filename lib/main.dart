@@ -48,6 +48,8 @@ class MyApp extends StatelessWidget {
             const JeuSons(title: "Innov'Anglais"),
         '/routeProfil': (BuildContext context) =>
             const ProfilPage(title: "Innov'Anglais"),
+        '/routeMemory': (BuildContext context) =>
+            const Memory(title: "Innov'Anglais"),
       },
     );
   }

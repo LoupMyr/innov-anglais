@@ -60,7 +60,7 @@ class MemoryGame {
     String lien = "";
     switch (id) {
       case 8:
-        lien = "lib/assets/animaux/canard.png";
+        lien = "lib/assets/animaux/canard.jpg";
         break;
       case 9:
         lien = "lib/assets/animaux/chat.jpeg";
