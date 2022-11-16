@@ -25,7 +25,7 @@ class Api {
     );
   }
 
-  void UpdateToken() async {
+  Future<void> UpdateToken() async {
     var connexion = await Api.recupConnect(_login, _password);
     if (connexion.statusCode == 200) {
       var data = convert.jsonDecode(connexion.body);
@@ -34,7 +34,7 @@ class Api {
   }
 
   Future<http.Response> getMots() async {
-    UpdateToken();
+    await UpdateToken();
     return http.get(
       Uri.parse(
           //'https://s3-4430.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/listes/' + id.toString()'
@@ -60,7 +60,7 @@ class Api {
   }
 
   Future<http.Response> getLists() async {
-    UpdateToken();
+    await UpdateToken();
     return http.get(
       Uri.parse(
           //'https://s3-4430.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/listes/' + id.toString()'
