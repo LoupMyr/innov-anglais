@@ -48,7 +48,6 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ),
               ),
             ),
-            backgroundColor: Colors.yellow,
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(30),
@@ -194,7 +193,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           ),
         ),
         // Couleur BottomAppbar
-        color: Colors.yellow,
+        color: Theme.of(context).primaryColor,
         child: Container(
           margin: const EdgeInsets.only(left: 12.0, right: 12.0),
           child: Row(
@@ -212,12 +211,14 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     iconSize: 27.0,
                     icon: const Icon(
                       Icons.play_arrow_rounded,
-                      color: Colors.green,
+                      color: Colors.white,
                     ),
                   ),
                   const Text(
                     "Jouer",
-                    style: TextStyle(color: Colors.green),
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
                 ],
               ),
