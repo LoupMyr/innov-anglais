@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:innov_anglais/class/api.dart';
 import 'package:innov_anglais/class/test.dart';
 
@@ -45,6 +46,24 @@ class WordListState extends State<WordList> {
     var id = ModalRoute.of(context)?.settings.arguments as int;
     if (!recupDataBool) {
       recupData(id);
+      return Scaffold(
+          appBar: AppBar(
+            title: Text(widget.title),
+          ),
+          body: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      SpinKitCubeGrid(
+                        color: Colors.orange,
+                        size: 100,
+                      )
+                    ])
+              ]));
     }
     return Scaffold(
         appBar: AppBar(

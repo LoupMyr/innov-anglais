@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:innov_anglais/class/test.dart';
 import 'dart:math';
 
@@ -24,7 +25,20 @@ class TestState extends State<TestPage> {
           if (snapshot.hasData) {
             return testBody();
           } else {
-            return const Text("chargement");
+            return Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        SpinKitCubeGrid(
+                          color: Colors.orange,
+                          size: 100,
+                        )
+                      ])
+                ]);
           }
         });
     super.initState();

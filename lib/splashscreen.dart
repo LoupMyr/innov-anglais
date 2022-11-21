@@ -34,7 +34,7 @@ class SplashScreenState extends State<MyHomePage> {
           Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            color: Color.fromARGB(255, 238, 215, 6),
+            color: Colors.lightBlueAccent,
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

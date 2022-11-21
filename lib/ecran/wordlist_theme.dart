@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:innov_anglais/class/api.dart';
 import 'dart:convert' as convert;
 
@@ -19,9 +20,11 @@ class WordListThemeState extends State<WordListTheme> {
   void recupData() async {
     var data2 = await api.getLists();
     data = convert.jsonDecode(data2.body);
-    setState(() {
-      recupDataBool = true;
-    });
+    if (this.mounted) {
+      setState(() {
+        recupDataBool = true;
+      });
+    }
   }
 
   Widget buildTheme(int index) {
@@ -40,6 +43,24 @@ class WordListThemeState extends State<WordListTheme> {
   Widget build(BuildContext context) {
     if (!recupDataBool) {
       recupData();
+      return Scaffold(
+          appBar: AppBar(
+            title: Text(widget.title),
+          ),
+          body: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      SpinKitCubeGrid(
+                        color: Colors.orange,
+                        size: 100,
+                      )
+                    ])
+              ]));
     }
     return Scaffold(
         appBar: AppBar(

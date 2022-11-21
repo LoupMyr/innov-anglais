@@ -41,6 +41,24 @@ class ProfilPageState extends State<ProfilPage> {
   Widget build(BuildContext context) {
     if (!recupDataBool) {
       recupProfil();
+      return Scaffold(
+          appBar: AppBar(
+            title: Text(widget.title),
+          ),
+          body: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      SpinKitCubeGrid(
+                        color: Colors.orange,
+                        size: 100,
+                      )
+                    ])
+              ]));
     }
     return Scaffold(
       appBar: AppBar(

@@ -14,8 +14,7 @@ class Api {
 
   static Future<http.Response> recupConnect(String login, String mdp) {
     return http.post(
-      Uri.parse(
-          'https://s3-4430.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/authentication_token'),
+      Uri.parse(localUrl + 'authentication_token'),
       //'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/authentication_token'),
       headers: <String, String>{
         'Accept': 'application/json; charset=UTF-8',
@@ -37,8 +36,7 @@ class Api {
   Future<http.Response> getMots() async {
     await UpdateToken();
     return http.get(
-      Uri.parse(
-          'https://s3-4430.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/mots'),
+      Uri.parse(localUrl + 'mots'),
       //'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/mots'),
       headers: <String, String>{
         'Accept': 'application/json',
@@ -48,6 +46,7 @@ class Api {
   }
 
   Future<List<dynamic>> getWordsByListId(int id) async {
+    await UpdateToken();
     var data = convert.jsonDecode((await getLists()).body);
     List<dynamic> lesMots = [];
     log(data.toString());
@@ -62,8 +61,7 @@ class Api {
   Future<http.Response> getUsers() async {
     await UpdateToken();
     return http.get(
-      Uri.parse(
-          'https://s3-4430.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/users'),
+      Uri.parse(localUrl + 'users'),
       //'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/mots'),
       headers: <String, String>{
         'Accept': 'application/json',
@@ -86,8 +84,7 @@ class Api {
   Future<http.Response> getLists() async {
     await UpdateToken();
     return http.get(
-      Uri.parse(
-          'https://s3-4430.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/listes'),
+      Uri.parse(localUrl + 'listes'),
       //'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/listes'),
       headers: <String, String>{
         'Accept': 'application/json',
@@ -99,48 +96,16 @@ class Api {
   //obtiens la liste des mots ayant un theme donne
   Future<List<Mot>> getWordsByTheme({required String theme}) async {
     await UpdateToken();
-    var reponse = await http.get(
-        Uri.parse(
-            'https://s3-4430.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/listes'
-            //"https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/listes"
-            ),
-        headers: <String, String>{
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': 'Bearer $localToken'
-        });
-    if (reponse.statusCode == 200) {
-      for (var liste in convert.jsonDecode(reponse.body)) {
-        if (liste['theme'] == theme) {
-          int id = liste['id'];
-          var reponse = await http.get(
-              Uri.parse(
-                  'https://s3-4430.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/mots'
-                  //"https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/mots"
-                  ),
-              headers: <String, String>{
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Authorization': 'Bearer $localToken'
-              });
-          if (reponse.statusCode == 200) {
-            List<Mot> mesMots = [];
-            List apiMots = convert.jsonDecode(reponse.body);
-            for (var mot in apiMots) {
-              for (var theme in mot['appartenir']) {
-                if (theme == '/Inno-v-Anglais/public/api/listes/$id') {
-                  mesMots.add(Mot.fromMap(mot));
-                }
-              }
-            }
-            return mesMots;
-          }
+    var data = convert.jsonDecode((await getLists()).body);
+    List<Mot> lesMots = [];
+    log(data.toString());
+    for (var elt in data) {
+      if (elt['theme'] == theme) {
+        for (var elt in elt['mots']) {
+          lesMots.add(Mot.fromMap(elt));
         }
       }
-      print("Error: no such theme!");
-      return [];
-    } else {
-      throw Exception("Error: Api sent Code: ${reponse.statusCode}");
     }
+    return lesMots;
   }
 }
