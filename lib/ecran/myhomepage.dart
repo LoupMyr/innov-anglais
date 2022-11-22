@@ -131,10 +131,10 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       height: 30,
                                       width: 30,
                                       decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                          color: const Color.fromARGB(
-                                              255, 206, 197, 197)),
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        color: Colors.yellow.shade700,
+                                      ),
                                       child: const Icon(Icons.play_arrow),
                                     ),
                                   ],
@@ -440,21 +440,6 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     ),
                   ),
                   const Text("Memory"),
-                ],
-              ),
-              Wrap(
-                crossAxisAlignment: WrapCrossAlignment.center,
-                direction: Axis.vertical,
-                children: [
-                  IconButton(
-                    onPressed: () =>
-                        {Navigator.pushNamed(context, '/routeJeuSons')},
-                    iconSize: 27.0,
-                    icon: const Icon(
-                      Icons.volume_up,
-                    ),
-                  ),
-                  const Text("Sons"),
                 ],
               ),
               Wrap(

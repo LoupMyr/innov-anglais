@@ -62,9 +62,8 @@ class Api {
     await UpdateToken();
     return http.get(
       Uri.parse(localUrl + 'users'),
-      //'https://tanguy.ozano.ovh/Inno-v-Anglais/public/api/mots'),
       headers: <String, String>{
-        'Accept': 'application/json',
+        //'Accept': 'application/json',
         'Authorization': "Bearer $localToken",
       },
     );
@@ -73,7 +72,8 @@ class Api {
   Future<dynamic> getUser() async {
     var data = convert.jsonDecode((await getUsers()).body);
     var user;
-    for (var elt in data) {
+    log(data.toString());
+    for (var elt in data['hydra:member']) {
       if (elt['username'] == localLogin) {
         user = elt;
       }

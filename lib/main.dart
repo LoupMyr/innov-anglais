@@ -10,7 +10,6 @@ import 'package:innov_anglais/ecran/test.dart';
 import 'package:innov_anglais/ecran/wordlist.dart';
 import 'package:innov_anglais/ecran/wordlist_theme.dart';
 import 'package:innov_anglais/splashscreen.dart';
-import 'package:innov_anglais/ecran/jeuSons.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,8 +43,6 @@ class MyApp extends StatelessWidget {
         '/wordlist': (BuildContext context) => WordList(title: "Innov'Anglais"),
         '/wordlistTheme': (BuildContext context) =>
             WordListTheme(title: "Innov'Anglais"),
-        '/routeJeuSons': (BuildContext context) =>
-            const JeuSons(title: "Innov'Anglais"),
         '/routeProfil': (BuildContext context) =>
             const ProfilPage(title: "Innov'Anglais"),
         '/routeMemory': (BuildContext context) =>

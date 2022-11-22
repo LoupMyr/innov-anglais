@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:innov_anglais/class/api.dart';
 
 class ClassementPage extends StatefulWidget {
   const ClassementPage({super.key, required this.title});
@@ -14,18 +15,15 @@ class ClassementPage extends StatefulWidget {
 
 class ClassementPageState extends State<ClassementPage> {
   Map<String, dynamic> _users = new Map();
-  bool _recupDataBool = false;
   int _status_code = -1;
+  Api _api = Api();
 
   Future<String> recupResultats() async {
-    String url =
-        "http://s3-4428.nuage-peda.fr/Inno-v-Anglais/InovApi/public/api/users";
-    var reponse = await http.get(Uri.parse(url));
+    var reponse = await _api.getUsers();
     String result = 'pas de result';
     _status_code = reponse.statusCode;
     if (reponse.statusCode == 200) {
       _users = convert.jsonDecode(reponse.body);
-      _recupDataBool = true;
       result = 'result';
     }
     await Future.delayed(const Duration(seconds: 1));
